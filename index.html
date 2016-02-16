@@ -9,15 +9,34 @@
 
     <h1>Hello Weekli</h1>
 
+    <div id="weekli"></div>
+
+    <div id="id"></div>
+
+    <div id="work"></div>
+
+
 </body>
 
 
 <script  type="text/javascript" src="js/weekli.js"></script>
 <script>
     var weekli = new Weekli({
-        time_range: '25'
+        week: 'weekend'
     });
 
+    var weekli_id = new Weekli({
+        element_id: 'id'
+    });
+
+    var weekli_work = new Weekli({
+        element_id: 'work',
+        week: 'workweek'
+    });
+
+
     weekli.build();
+    weekli_id.build();
+    weekli_work.build();
 </script>
 </html>

@@ -4,16 +4,20 @@
 
 (function() {
 
-    // Define our constructor
+    /////////////////////////////
+    // Constructor
+    /////////////////////////////
     this.Weekli = function() {
 
-        // Create global element references
-        //this.overlay = null;
+        // Global element references
+        this.output = 'output';
 
-        // Define option defaults
+        // Option defaults
         var defaults = {
-            week: '7-day',
+            element_id: 'weekli',
+            week: '7 day',
             time_interval: 'hour_1',
+            closeButton: true,
             time_range: '0,24'
         };
 
@@ -21,26 +25,62 @@
         if (arguments[0] && typeof arguments[0] === "object") {
             this.options = extendDefaults(defaults, arguments[0]);
         }
-
     };
 
+    /////////////////////////////
+    // Public Methods
+    /////////////////////////////
     Weekli.prototype.build = function() {
         buildOut.call(this);
         initializeEvents.call(this);
     };
 
+    Weekli.prototype.alert = function(){
+        console.log(this.options.element_id + ' ' + this.output);
+    };
+
+    Weekli.prototype.get_output = function(){
+        return this.output;
+    };
+
+
+    /////////////////////////////
+    // Private Methods
+    /////////////////////////////
     function buildOut() {
-        console.log(this.options.time_range);
+        var parent_div  = document.getElementById(this.options.element_id);
+        this.weekli  = document.createElement('div');
+        this.weekli.innerHTML = buildHTML(this);
+
+        // if closeButton option is true, add a close button
+        if (this.options.closeButton === true) {
+            this.closeButton = document.createElement('button');
+            this.closeButton.innerHTML = '×';
+            this.weekli.appendChild(this.closeButton);
+        }
+
+        if(parent_div){
+            parent_div.appendChild(this.weekli)
+        } else{
+            console.error('ELEMENT_ID: ' + this.options.element_id + ' not found');
+        }
+
+
     }
 
+    /////////////////////////////
+    // Set events
+    /////////////////////////////
     function initializeEvents() {
-        //if (this.closeButton) {
-        //    this.closeButton.addEventListener('click', this.close.bind(this));
-        //}
+        if (this.closeButton) {
+            this.closeButton.addEventListener('click', this.alert.bind(this));
+        }
 
     }
 
-    // Utility method to extend defaults with user options
+    /////////////////////////////
+    // Get Custom Options
+    /////////////////////////////
     function extendDefaults(source, properties) {
         var property;
         for (property in properties) {
@@ -50,5 +90,30 @@
         }
         return source;
     }
+
+    /////////////////////////////
+    // Weekli HTML structure
+    /////////////////////////////
+    function buildHTML(weekli){
+        var weekli_html = 'hello world';
+        var week_type = weekli.options.week;
+
+        switch(week_type){
+            case 'workweek':
+                weekli_html = '5';
+                break;
+
+            case 'weekend':
+                weekli_html = '2';
+                break;
+
+            default:
+                weekli_html = '7';
+        }
+
+
+        return weekli_html;
+    }
+
 
 }());
