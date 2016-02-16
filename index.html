@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>weekli</title>
+    <title>WEEKLI</title>
     <link rel="stylesheet" type="text/css" href="css/weekli.css"/>
 </head>
 <body>
@@ -16,27 +16,41 @@
     <div id="work"></div>
 
 
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>8-9</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>9-10</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+
 </body>
 
-
 <script  type="text/javascript" src="js/weekli.js"></script>
-<script>
-    var weekli = new Weekli({
-        week: 'weekend'
-    });
+<script  type="text/javascript" src="js/another.js"></script>
 
-    var weekli_id = new Weekli({
-        element_id: 'id'
-    });
-
-    var weekli_work = new Weekli({
-        element_id: 'work',
-        week: 'workweek'
-    });
-
-
-    weekli.build();
-    weekli_id.build();
-    weekli_work.build();
-</script>
 </html>

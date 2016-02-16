@@ -15,16 +15,14 @@
         // Option defaults
         var defaults = {
             element_id: 'weekli',
-            week: '7 day',
+            week: 'week',
             time_interval: 'hour_1',
             closeButton: true,
             time_range: '0,24'
         };
 
         // Create options by extending defaults with the passed in arguments
-        if (arguments[0] && typeof arguments[0] === "object") {
-            this.options = extendDefaults(defaults, arguments[0]);
-        }
+        this.options = extendDefaults(defaults, arguments[0]);
     };
 
     /////////////////////////////
@@ -60,7 +58,7 @@
         }
 
         if(parent_div){
-            parent_div.appendChild(this.weekli)
+            parent_div.appendChild(this.weekli);
         } else{
             console.error('ELEMENT_ID: ' + this.options.element_id + ' not found');
         }
@@ -95,7 +93,7 @@
     // Weekli HTML structure
     /////////////////////////////
     function buildHTML(weekli){
-        var weekli_html = 'hello world';
+        var weekli_html = '';
         var week_type = weekli.options.week;
 
         switch(week_type){

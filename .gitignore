@@ -1,1 +1,12 @@
+# GIT IGNORE
+
+#Generated files
 .idea/
+
+#Test and workflow files
+js/another.js
+Gruntfile.js
+weekli.less
+
+#Node Modules
+node_modules/
