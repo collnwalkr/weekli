@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>weekli</title>
+    <link rel="stylesheet" type="text/css" href="css/weekli.css"/>
 </head>
 <body>
 
-<h1>Hello Github</h1>
+    <h1>Hello Weekli</h1>
 
 </body>
 
-<script  type="text/javascript" src="weekli.js"></script>
 
+<script  type="text/javascript" src="js/weekli.js"></script>
+<script>
+    var weekli = new Weekli({
+        time_range: '25'
+    });
+
+    weekli.build();
+</script>
 </html>
