@@ -1,0 +1,19 @@
+{
+  "name": "weekli",
+  "version": "0.0.1",
+  "description": "Javascript component for users can quickly select their availability during a week, workweek, or weekend.",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.5",
+    "less": "^2.6.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/collnwalkr/weekli.git"
+  },
+  "author": "Collin Walker",
+  "license": "ISC",
+  "homepage": "https://github.com/collnwalkr/weekli#readme"
+}
