@@ -51,14 +51,15 @@
     function buildOut() {
         var parent_div  = document.getElementById(this.options.element_id);
         this.weekli  = document.createElement('div');
-        this.weekli.innerHTML = buildHTML(this);
+        //this.weekli.innerHTML = buildHTML(this);
 
-        // if closeButton option is true, add a close button
+        /* if closeButton option is true, add a close button
         if (this.options.closeButton === true) {
             this.closeButton = document.createElement('button');
             this.closeButton.innerHTML = '×';
             this.weekli.appendChild(this.closeButton);
         }
+        */
 
         if(parent_div){
             parent_div.appendChild(this.weekli);

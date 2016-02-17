@@ -1,5 +1,37 @@
+table.weekli {
+  background-color: #222220;
+  width: 100%;
+  table-layout: fixed;
+  text-align: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+table.weekli:hover {
+  cursor: pointer;
+}
+table.weekli th {
+  background-color: #f9f9eb;
+  padding: 10px;
+}
+table.weekli td {
+  background-color: #FF6138;
+}
+table.weekli td.time-column {
+  background-color: #f9f9eb;
+  padding: 10px;
+}
+.wk-hour:hover {
+  cursor: pointer;
+}
+table.weekli .available {
+  background-color: #79BD8F;
+}
 body {
-  background-color: #BEEB9F;
+  background-color: #f9f9eb;
   font-family: Arial;
   font-weight: 500;
   font-style: normal;
@@ -7,9 +39,17 @@ body {
 h1 {
   color: #FF6138;
   font-weight: 800;
+  text-align: center;
+  margin-top: 5em;
 }
 h1:hover span {
   color: #32323a;
+}
+.container {
+  max-width: 900px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 @font-face {
   font-family: Arial;

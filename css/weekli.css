@@ -1,5 +1,5 @@
 table.weekli {
-  background-color: green;
+  background-color: #222220;
   width: 100%;
   table-layout: fixed;
   text-align: left;
@@ -14,17 +14,19 @@ table.weekli:hover {
   cursor: pointer;
 }
 table.weekli th {
-  background-color: yellow;
+  background-color: #f9f9eb;
+  padding: 10px;
 }
 table.weekli td {
-  background-color: red;
+  background-color: #FF6138;
 }
 table.weekli td.time-column {
-  background-color: lightblue;
+  background-color: #f9f9eb;
+  padding: 10px;
 }
 .wk-hour:hover {
   cursor: pointer;
 }
 table.weekli .available {
-  background-color: green;
+  background-color: #79BD8F;
 }

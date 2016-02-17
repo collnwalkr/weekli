@@ -6,18 +6,24 @@
 @mid-green: #79BD8F;
 @dark-green: #00A388;
 
+@import "weekli.less";
+
 
 /////////////////////////////
 // ELEMENTS
 /////////////////////////////
 body{
-  background-color: @light-green;
+  background-color: @light-grey;
   .font-face;
 }
 
 h1 {
   color: @red-color;
   .bold-font;
+  text-align: center;
+
+  margin-top: 5em;
+
 
 
   &:hover span {
@@ -25,6 +31,13 @@ h1 {
   }
 }
 
+.container{
+  max-width: 900px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
 /////////////////////////////
 // FONTS
 /////////////////////////////

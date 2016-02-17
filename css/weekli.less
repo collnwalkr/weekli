@@ -1,5 +1,13 @@
+// COLORS
+@dark-grey: #222220;
+@light-grey: #f9f9eb;
+@red-color: #FF6138;
+@light-green: #BEEB9F;
+@mid-green: #79BD8F;
+@dark-green: #00A388;
+
 table.weekli{
-  background-color: green;
+  background-color: @dark-grey;
   width: 100%;
   table-layout: fixed;
   text-align: left;
@@ -16,15 +24,19 @@ table.weekli{
   }
 
   th{
-    background-color: yellow;
+    background-color: @light-grey;
+    padding: 10px;
   }
 
   td{
-    background-color: red;
+    background-color: @red-color;
+
   }
 
   td.time-column{
-    background-color: lightblue;
+    background-color: @light-grey;
+    padding: 10px;
+
   }
 }
 
@@ -36,5 +48,5 @@ table.weekli{
 }
 
 table.weekli .available{
-  background-color: green;
+  background-color: @mid-green;
 }
