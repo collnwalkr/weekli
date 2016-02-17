@@ -8,7 +8,12 @@
     "grunt": "^0.4.5",
     "less": "^2.6.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-less": "^1.2.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/collnwalkr/weekli.git"
