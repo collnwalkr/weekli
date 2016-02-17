@@ -1,0 +1,30 @@
+table.weekli {
+  background-color: green;
+  width: 100%;
+  table-layout: fixed;
+  text-align: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+table.weekli:hover {
+  cursor: pointer;
+}
+table.weekli th {
+  background-color: yellow;
+}
+table.weekli td {
+  background-color: red;
+}
+table.weekli td.time-column {
+  background-color: lightblue;
+}
+.wk-hour:hover {
+  cursor: pointer;
+}
+table.weekli .available {
+  background-color: green;
+}

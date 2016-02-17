@@ -31,14 +31,13 @@ module.exports = function(grunt) {
         connect: {
             server: {
                 options: {
-                    port: 9001,
-                    keepalive: true
+                    port: 9001
                 }
             }
         },
 
         watch: {
-            files: ['<%= jshint.files %>', 'less/*.less'],
+            files: ['js/*.js', 'css/*.less'],
             tasks: ['jshint', 'less']
         }
     });
@@ -49,5 +48,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['jshint', 'less','connect']);
+    grunt.registerTask('default', ['jshint', 'less','connect', 'watch']);
 };
