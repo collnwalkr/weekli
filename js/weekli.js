@@ -53,13 +53,6 @@
         this.weekli  = document.createElement('div');
         //this.weekli.innerHTML = buildHTML(this);
 
-        /* if closeButton option is true, add a close button
-        if (this.options.closeButton === true) {
-            this.closeButton = document.createElement('button');
-            this.closeButton.innerHTML = '×';
-            this.weekli.appendChild(this.closeButton);
-        }
-        */
 
         if(parent_div){
             parent_div.appendChild(this.weekli);
@@ -71,7 +64,7 @@
 
     //HANDLE clicking on cell
     function mouse_down_cell(){
-        var attribute = this.getAttribute('wk');
+        var attribute = this.getAttribute('data-wk-val');
         if(this.classList.contains('available')){
             wk_dragging_state = 'available';
         } else{
@@ -83,7 +76,7 @@
 
     //HANDLE mousing over cell
     function mouse_hover_cell(){
-        var attribute = this.getAttribute('wk');
+        var attribute = this.getAttribute('data-wk-val');
         var cell_state;
 
         //GET the current state (available or unavailable) of the current cell
@@ -124,17 +117,37 @@
         wk_dragging = false;
     };
 
+    //IF the user clicks on a time column, toggle the entire row
+    function time_row_mousedown(){
+        var time_attr = this.getAttribute('data-time-col');
+        var time_cell_match = document.querySelectorAll("[data-wk-hr= '" + time_attr + "']");
+
+        for (var i = 0; i < time_cell_match.length; i++) {
+            change_state(time_cell_match[i]);
+        }
+    }
+    
+    //IF the user clicks on a time column, toggle the entire row
+    function day_column_mousedown(){
+        var day_attr = this.getAttribute('data-day-col');
+        var day_cell_match = document.querySelectorAll("[data-wk-day= '" + day_attr + "']");
+
+
+        for (var i = 0; i < day_cell_match.length; i++) {
+            change_state(day_cell_match[i]);
+        }
+    }
+
     /////////////////////////////
     // Set events
     /////////////////////////////
     function initializeEvents() {
-        if (this.closeButton) {
-            this.closeButton.addEventListener('click', this.alert.bind(this));
-        }
 
         //GET dom elements
-        var wk_cell = document.getElementsByClassName('wk-cell');
-        var table   = document.getElementsByClassName('weekli');
+        var wk_cell       = document.getElementsByClassName('wk-cell');
+        var table         = document.getElementsByClassName('weekli');
+        var time_column   = document.getElementsByClassName('wk-time-column');
+        var day_column    = document.getElementsByClassName('wk-day-column');
 
 
         //ADD event listener to table cells
@@ -146,6 +159,16 @@
         //ADD event listener to table for dragging functionality
         for (var j = 0; j < table.length; j++) {
             table[j].addEventListener('mousedown',table_mousedown, false);
+        }
+
+        //ADD event listener to time column to toggle row on click
+        for (var k = 0; k < time_column.length; k++) {
+            time_column[k].addEventListener('mousedown',time_row_mousedown, false);
+        }
+
+        //ADD event listener to time column to toggle row on click
+        for (var l = 0; l < day_column.length; l++) {
+            day_column[l].addEventListener('mousedown',day_column_mousedown, false);
         }
 
     }

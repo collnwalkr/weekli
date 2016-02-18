@@ -20,7 +20,7 @@ table.weekli th {
 table.weekli td {
   background-color: #FF6138;
 }
-table.weekli td.time-column {
+table.weekli td.wk-time-column {
   background-color: #f9f9eb;
   padding: 10px;
 }
