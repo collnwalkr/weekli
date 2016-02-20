@@ -20,7 +20,7 @@ table.weekli th {
 table.weekli td {
   background-color: #FF6138;
 }
-table.weekli td.wk-time-column {
+table.weekli td.wk-time {
   background-color: #f9f9eb;
   padding: 10px;
 }
@@ -29,4 +29,36 @@ table.weekli td.wk-time-column {
 }
 table.weekli .available {
   background-color: #79BD8F;
+}
+div.wk-weekli {
+  background-color: #222220;
+  width: 100%;
+  text-align: left;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+div.wk-weekli div {
+  background-color: #f9f9eb;
+  border: 1px #222220 solid;
+}
+div.wk-weekli:hover {
+  cursor: pointer;
+}
+div.wk-weekli div.wk-column {
+  display: inline-block;
+  width: 16%;
+}
+div.wk-weekli div.wk-day {
+  display: inline-block;
+  width: 16%;
+}
+div.wk-weekli div.wk-cell.wk-column {
+  width: 5%;
+}
+div.wk-weekli div.wk-time {
+  padding: 10px;
 }

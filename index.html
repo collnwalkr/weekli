@@ -22,16 +22,16 @@
             <thead>
             <tr>
                 <th></th>
-                <th class="wk-day-column" data-day-col="M" >Monday</th>
-                <th class="wk-day-column" data-day-col="Tu">Tuesday</th>
-                <th class="wk-day-column" data-day-col="W" >Wednesday</th>
-                <th class="wk-day-column" data-day-col="Th">Thursday</th>
-                <th class="wk-day-column" data-day-col="F" >Friday</th>
+                <th class="wk-day wk-column" data-day-col="M" >Monday</th>
+                <th class="wk-day wk-column" data-day-col="Tu">Tuesday</th>
+                <th class="wk-day wk-column" data-day-col="W" >Wednesday</th>
+                <th class="wk-day wk-column" data-day-col="Th">Thursday</th>
+                <th class="wk-day wk-column" data-day-col="F" >Friday</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td data-time-col="8-9" class="wk-time-column">8-9</td>
+                <td data-time-col="8-9" class="wk-time wk-column">8-9</td>
                 <td data-wk-hr="8-9" data-wk-day="M"  class="wk-cell"></td>
                 <td data-wk-hr="8-9" data-wk-day="Tu" class="wk-cell"></td>
                 <td data-wk-hr="8-9" data-wk-day="W"  class="wk-cell"></td>
@@ -39,7 +39,7 @@
                 <td data-wk-hr="8-9" data-wk-day="F"  class="wk-cell"></td>
             </tr>
             <tr>
-                <td data-time-col="9-10" class="wk-time-column">9-10</td>
+                <td data-time-col="9-10" class="wk-time wk-column">9-10</td>
                 <td data-wk-hr="9-10" data-wk-day="M"  class="wk-cell"></td>
                 <td data-wk-hr="9-10" data-wk-day="Tu" class="wk-cell"></td>
                 <td data-wk-hr="9-10" data-wk-day="W"  class="wk-cell"></td>
@@ -47,7 +47,7 @@
                 <td data-wk-hr="9-10" data-wk-day="F"  class="wk-cell"></td>
             </tr>
             <tr>
-                <td data-time-col="10-11" class="wk-time-column">10-11</td>
+                <td data-time-col="10-11" class="wk-time wk-column">10-11</td>
                 <td data-wk-hr="10-11" data-wk-day="M"  class="wk-cell"></td>
                 <td data-wk-hr="10-11" data-wk-day="Tu" class="wk-cell"></td>
                 <td data-wk-hr="10-11" data-wk-day="W"  class="wk-cell"></td>
@@ -55,7 +55,7 @@
                 <td data-wk-hr="10-11" data-wk-day="F"  class="wk-cell"></td>
             </tr>
             <tr>
-                <td data-time-col="11-12" class="wk-time-column">11-12</td>
+                <td data-time-col="11-12" class="wk-time wk-column">11-12</td>
                 <td data-wk-hr="11-12" data-wk-day="M"  class="wk-cell"></td>
                 <td data-wk-hr="11-12" data-wk-day="Tu" class="wk-cell"></td>
                 <td data-wk-hr="11-12" data-wk-day="W"  class="wk-cell"></td>
@@ -64,6 +64,30 @@
             </tr>
             </tbody>
         </table>
+
+
+        <!-- DIV IMPLEMENTATION -->
+        <div class="wk-weekli">
+
+            <div>
+                <div class=" wk-column wk-day"></div>
+                <div class="wk-column wk-day" data-day-col="M" >Monday</div>
+                <div class="wk-column wk-day" data-day-col="Tu">Tuesday</div>
+                <div class="wk-column wk-day" data-day-col="W" >Wednesday</div>
+                <div class="wk-column wk-day" data-day-col="Th">Thursday</div>
+                <div class="wk-column wk-day" data-day-col="F" >Friday</div>
+            </div>
+
+            <div>
+                <div data-time-col="11-12" class="wk-time wk-column">11-12</div>
+                <div data-wk-hr="11-12" data-wk-day="M"  class="wk-cell wk-column">&nbsp;</div>
+                <div data-wk-hr="11-12" data-wk-day="Tu" class="wk-cell wk-column">&nbsp;</div>
+                <div data-wk-hr="11-12" data-wk-day="W"  class="wk-cell wk-column">&nbsp;</div>
+                <div data-wk-hr="11-12" data-wk-day="Th" class="wk-cell wk-column">&nbsp;</div>
+                <div data-wk-hr="11-12" data-wk-day="F"  class="wk-cell wk-column">&nbsp;</div>
+            </div>
+
+        </div>
     </div>
 
 </body>

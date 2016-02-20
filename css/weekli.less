@@ -33,7 +33,7 @@ table.weekli{
 
   }
 
-  td.wk-time-column{
+  td.wk-time{
     background-color: @light-grey;
     padding: 10px;
 
@@ -49,4 +49,48 @@ table.weekli{
 
 table.weekli .available{
   background-color: @mid-green;
+}
+
+
+div.wk-weekli{
+
+
+  background-color: @dark-grey;
+  width: 100%;
+  text-align: left;
+
+  div{
+    background-color: @light-grey;
+    border: 1px @dark-grey solid;
+  }
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+  div.wk-column{
+    display: inline-block;
+    width: 16%;
+  }
+
+
+  div.wk-day{
+    display: inline-block;
+    width: 16%;
+  }
+
+  div.wk-cell.wk-column{
+    width: 5%;
+  }
+
+  div.wk-time{
+    padding: 10px;
+  }
+
 }

@@ -146,8 +146,8 @@
         //GET dom elements
         var wk_cell       = document.getElementsByClassName('wk-cell');
         var table         = document.getElementsByClassName('weekli');
-        var time_column   = document.getElementsByClassName('wk-time-column');
-        var day_column    = document.getElementsByClassName('wk-day-column');
+        var time_column   = document.getElementsByClassName('wk-time');
+        var day_column    = document.getElementsByClassName('wk-day');
 
 
         //ADD event listener to table cells
