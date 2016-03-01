@@ -16,4 +16,4 @@ var weekli_work = new Weekli({
 
 weekli.build();
 //weekli_id.build();
-//weekli_work.build();
+weekli_work.build();

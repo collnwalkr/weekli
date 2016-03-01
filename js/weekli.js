@@ -118,9 +118,10 @@
     };
 
     //IF the user clicks on a time column, toggle the entire row
-    function time_row_mousedown(){
-        var time_attr = this.getAttribute('data-time-col');
-        var time_cell_match = document.querySelectorAll("[data-wk-hr= '" + time_attr + "']");
+    function time_row_mousedown(evt){
+        var element_id = evt.target.element_id;
+        var time_attr = this.getAttribute('data-wk-time-col');
+        var time_cell_match = document.getElementById(element_id).querySelectorAll("[data-wk-hr= '" + time_attr + "']");
 
         for (var i = 0; i < time_cell_match.length; i++) {
             change_state(time_cell_match[i]);
@@ -128,9 +129,10 @@
     }
     
     //IF the user clicks on a time column, toggle the entire row
-    function day_column_mousedown(){
-        var day_attr = this.getAttribute('data-day-col');
-        var day_cell_match = document.querySelectorAll("[data-wk-day= '" + day_attr + "']");
+    function day_column_mousedown(evt){
+        var element_id = evt.target.element_id;
+        var day_attr = this.getAttribute('data-wk-day-col');
+        var day_cell_match = document.getElementById(element_id).querySelectorAll("[data-wk-day= '" + day_attr + "']");
 
 
         for (var i = 0; i < day_cell_match.length; i++) {
@@ -143,11 +145,13 @@
     /////////////////////////////
     function initializeEvents() {
 
+
         //GET dom elements
-        var wk_cell       = document.getElementsByClassName('wk-cell');
-        var table         = document.getElementsByClassName('weekli');
-        var time_column   = document.getElementsByClassName('wk-time');
-        var day_column    = document.getElementsByClassName('wk-day');
+        var wk_id         = this.options.element_id;
+        var wk_cell       = document.getElementById(wk_id).getElementsByClassName('wk-cell');
+        var table         = document.getElementById(wk_id).getElementsByClassName('weekli');
+        var time_column   = document.getElementById(wk_id).getElementsByClassName('wk-time');
+        var day_column    = document.getElementById(wk_id).getElementsByClassName('wk-day');
 
 
         //ADD event listener to table cells
@@ -164,11 +168,13 @@
         //ADD event listener to time column to toggle row on click
         for (var k = 0; k < time_column.length; k++) {
             time_column[k].addEventListener('mousedown',time_row_mousedown, false);
+            time_column[k].element_id = wk_id;
         }
 
         //ADD event listener to time column to toggle row on click
         for (var l = 0; l < day_column.length; l++) {
             day_column[l].addEventListener('mousedown',day_column_mousedown, false);
+            day_column[l].element_id = wk_id;
         }
 
     }
