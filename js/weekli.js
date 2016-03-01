@@ -10,7 +10,7 @@
     this.Weekli = function() {
 
         // Global element references
-        this.output = 'output';
+        this.output = {available: [], unavailable: []};
 
         // Option defaults
         var defaults = {
@@ -38,6 +38,39 @@
     };
 
     Weekli.prototype.get_output = function(){
+        //GET div id containing weekli
+        var wk_id = this.options.wk_id;
+        //GET the cells, but only the desktop version (remains synced with mobile)
+        var wk_cell = document.getElementById(wk_id).getElementsByClassName('weekli_desktop')[0].getElementsByClassName('wk-cell');
+
+        var output = {available: [], unavailable: []};
+        var cell_day  = '';
+        var cell_time = '';
+        var cell_available = true;
+        var cell_tuple = {};
+
+        //PUSH cells into output based of availability
+        for(var i = 0; i < wk_cell.length; i++){
+            cell_day  = wk_cell[i].getAttribute('data-wk-day');
+            cell_time = wk_cell[i].getAttribute('data-wk-hr');
+            //create object containing day and time
+            cell_tuple = {day: cell_day, time: cell_time};
+            cell_available = wk_cell[i].classList.contains('available');
+
+
+            //IF cell is available, push into available object
+            //ELSE put in unavailable object
+            if(cell_available){
+                output.available.push(cell_tuple);
+            }
+            else{
+                output.unavailable.push(cell_tuple);
+            }
+
+        }
+
+        this.output = output;
+
         return this.output;
     };
 
@@ -133,7 +166,6 @@
         }
     }
 
-
     //IF the user drags on the table, set dragging to true
     //deselect any text (prevents unsightly 'ghosting' movement)
     function table_mousedown(){
@@ -147,6 +179,7 @@
         wk_dragging = false;
     };
 
+    //HANDLE clicking on time row
     //IF the user clicks on a time row, toggle the entire row
     function time_row_mousedown(evt){
         var wk_id = evt.target.wk_id;
@@ -178,7 +211,8 @@
 
     }
 
-    //IF the user clicks on a time column, toggle the entire column
+    //HANDLE clicking on day column
+    //IF the user clicks on a day column, toggle the entire column
     function day_column_mousedown(evt){
         var wk_id = evt.target.wk_id;
         var day_attr = this.getAttribute('data-wk-day-col');
