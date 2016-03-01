@@ -9,9 +9,6 @@
     /////////////////////////////
     this.Weekli = function() {
 
-        // Global element references
-        this.output = {available: [], unavailable: []};
-
         // Option defaults
         var defaults = {
             wk_id: 'weekli',
@@ -33,9 +30,6 @@
         initializeEvents.call(this);
     };
 
-    Weekli.prototype.alert = function(){
-        console.log(this.options.wk_id + ' ' + this.output);
-    };
 
     Weekli.prototype.get_output = function(){
         //GET div id containing weekli
@@ -57,7 +51,6 @@
             cell_tuple = {day: cell_day, time: cell_time};
             cell_available = wk_cell[i].classList.contains('available');
 
-
             //IF cell is available, push into available object
             //ELSE put in unavailable object
             if(cell_available){
@@ -66,12 +59,9 @@
             else{
                 output.unavailable.push(cell_tuple);
             }
+        } //end for
 
-        }
-
-        this.output = output;
-
-        return this.output;
+        return output;
     };
 
 
@@ -145,7 +135,7 @@
                 toggle_state(cell_match[i]);
             }
 
-        }
+        }//end if
     }
 
     //alternate element from available -> unavailable or unavailable -> available
@@ -183,7 +173,7 @@
     //IF the user clicks on a time row, toggle the entire row
     function time_row_mousedown(evt){
         var wk_id = evt.target.wk_id;
-        var time_attr = this.getAttribute('data-wk-time-col');
+        var time_attr = this.getAttribute('data-wk-time-row');
         var time_cell_match = document.getElementById(wk_id).querySelectorAll("[data-wk-hr= '" + time_attr + "']");
         var all_available = true;
 
@@ -195,7 +185,7 @@
                 all_available = false;
                 break;
             }
-        }
+        }//end for
 
         //IF row contains a single unavailable, change
         //  all cells to available
@@ -207,7 +197,7 @@
             else{
                 change_state(time_cell_match[k], 'available');
             }
-        }
+        }//end for
 
     }
 
@@ -229,7 +219,7 @@
                 all_available = false;
                 break;
             }
-        }
+        }//end for
 
 
         //IF column contains a single unavailable, change
@@ -242,7 +232,7 @@
             else{
                 change_state(day_cell_match[k], 'available');
             }
-        }
+        }//end for
     }
 
     /////////////////////////////
@@ -255,7 +245,7 @@
         var wk_id         = this.options.wk_id;
         var wk_cell       = document.getElementById(wk_id).getElementsByClassName('wk-cell');
         var table         = document.getElementById(wk_id).getElementsByClassName('weekli');
-        var time_column   = document.getElementById(wk_id).getElementsByClassName('wk-time');
+        var time_row      = document.getElementById(wk_id).getElementsByClassName('wk-time');
         var day_column    = document.getElementById(wk_id).getElementsByClassName('wk-day');
 
 
@@ -272,14 +262,20 @@
         }
 
         //ADD event listener to time column to toggle row on click
-        for (var k = 0; k < time_column.length; k++) {
-            time_column[k].addEventListener('mousedown',time_row_mousedown, false);
-            time_column[k].wk_id = wk_id;
+        for (var k = 0; k < time_row.length; k++) {
+            time_row[k].addEventListener('mousedown',time_row_mousedown, false);
+            time_row[k].wk_id = wk_id;
         }
 
         //ADD event listener to time column to toggle row on click
         for (var l = 0; l < day_column.length; l++) {
             day_column[l].addEventListener('mousedown',day_column_mousedown, false);
+
+            //ADD event listener to span children
+            for(var m = 0; m < day_column[l].childNodes.length; m++){
+                day_column[l].childNodes[m].addEventListener('mousedown',day_column_mousedown, false);
+                day_column[l].childNodes[m].wk_id = wk_id;
+            }
             day_column[l].wk_id = wk_id;
         }
 
