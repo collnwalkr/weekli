@@ -4,16 +4,16 @@
 var weekli = new Weekli();
 
 var weekli_id = new Weekli({
-    element_id: 'id',
+    wk_id: 'id',
     week: 'weekend'
 });
 
 var weekli_work = new Weekli({
-    element_id: 'work',
+    wk_id: 'work',
     week: 'workweek'
 });
 
 
 weekli.build();
 //weekli_id.build();
-weekli_work.build();
+//weekli_work.build();

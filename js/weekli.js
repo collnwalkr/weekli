@@ -14,7 +14,7 @@
 
         // Option defaults
         var defaults = {
-            element_id: 'weekli',
+            wk_id: 'weekli',
             week: 'week',
             time_interval: 'hour_1',
             closeButton: true,
@@ -34,7 +34,7 @@
     };
 
     Weekli.prototype.alert = function(){
-        console.log(this.options.element_id + ' ' + this.output);
+        console.log(this.options.wk_id + ' ' + this.output);
     };
 
     Weekli.prototype.get_output = function(){
@@ -49,7 +49,7 @@
     var wk_dragging_state;
 
     function buildOut() {
-        var parent_div  = document.getElementById(this.options.element_id);
+        var parent_div  = document.getElementById(this.options.wk_id);
         this.weekli  = document.createElement('div');
         //this.weekli.innerHTML = buildHTML(this);
 
@@ -57,25 +57,35 @@
         if(parent_div){
             parent_div.appendChild(this.weekli);
         } else{
-            console.error('ELEMENT_ID: ' + this.options.element_id + ' not found');
+            console.error('wk_id: ' + this.options.wk_id + ' not found');
         }
 
     }
 
     //HANDLE clicking on cell
-    function mouse_down_cell(){
+    function mouse_down_cell(evt){
         var attribute = this.getAttribute('data-wk-val');
+        var time_attr = this.getAttribute('data-wk-hr');
+        var day_attr = this.getAttribute('data-wk-day');
+        var wk_id = evt.target.wk_id;
+
         if(this.classList.contains('available')){
             wk_dragging_state = 'available';
         } else{
             wk_dragging_state = 'unavailable';
         }
 
-        change_state(this);
+        //GET the other cell that match current selection
+        //this is used to sync mobile and desktop tables
+        var cell_match = document.getElementById(wk_id).querySelectorAll("[data-wk-hr= '" + time_attr + "'][data-wk-day= '" + day_attr + "']");
+
+        for (var i = 0; i < cell_match.length; i++) {
+            toggle_state(cell_match[i]);
+        }
     }
 
     //HANDLE mousing over cell
-    function mouse_hover_cell(){
+    function mouse_hover_cell(evt){
         var attribute = this.getAttribute('data-wk-val');
         var cell_state;
 
@@ -90,16 +100,36 @@
         //Example: if user is dragging to change available -> unavailable, prevent
         //cells to go unavailable -> available
         if(wk_dragging && cell_state === wk_dragging_state){
-            change_state(this);
+
+
+            var time_attr = this.getAttribute('data-wk-hr');
+            var day_attr  = this.getAttribute('data-wk-day');
+            var wk_id = evt.target.wk_id;
+
+
+            var cell_match = document.getElementById(wk_id).querySelectorAll("[data-wk-hr= '" + time_attr + "'][data-wk-day= '" + day_attr + "']");
+            for (var i = 0; i < cell_match.length; i++) {
+                toggle_state(cell_match[i]);
+            }
+
         }
     }
 
     //alternate element from available -> unavailable or unavailable -> available
-    function change_state(element){
+    function toggle_state(element){
         if(element.classList.contains('available')){
             element.classList.remove('available');
         } else{
             element.classList.add('available');
+        }
+    }
+
+    //force element from to change state
+    function change_state(element, state){
+        if(state === 'available'){
+            element.classList.add('available');
+        } else{
+            element.classList.remove('available');
         }
     }
 
@@ -117,26 +147,67 @@
         wk_dragging = false;
     };
 
-    //IF the user clicks on a time column, toggle the entire row
+    //IF the user clicks on a time row, toggle the entire row
     function time_row_mousedown(evt){
-        var element_id = evt.target.element_id;
+        var wk_id = evt.target.wk_id;
         var time_attr = this.getAttribute('data-wk-time-col');
-        var time_cell_match = document.getElementById(element_id).querySelectorAll("[data-wk-hr= '" + time_attr + "']");
+        var time_cell_match = document.getElementById(wk_id).querySelectorAll("[data-wk-hr= '" + time_attr + "']");
+        var all_available = true;
 
+        //CHECK to see if the row contains any unavailable cells
         for (var i = 0; i < time_cell_match.length; i++) {
-            change_state(time_cell_match[i]);
+            if(time_cell_match[i].classList.contains('available')){
+                all_available = true;
+            } else{
+                all_available = false;
+                break;
+            }
         }
+
+        //IF row contains a single unavailable, change
+        //  all cells to available
+        //Else, change all cells to unavailable
+        for (var k = 0; k < time_cell_match.length; k++) {
+            if(all_available){
+                change_state(time_cell_match[k], 'unavailable');
+            }
+            else{
+                change_state(time_cell_match[k], 'available');
+            }
+        }
+
     }
-    
-    //IF the user clicks on a time column, toggle the entire row
+
+    //IF the user clicks on a time column, toggle the entire column
     function day_column_mousedown(evt){
-        var element_id = evt.target.element_id;
+        var wk_id = evt.target.wk_id;
         var day_attr = this.getAttribute('data-wk-day-col');
-        var day_cell_match = document.getElementById(element_id).querySelectorAll("[data-wk-day= '" + day_attr + "']");
+        var day_cell_match = document.getElementById(wk_id).querySelectorAll("[data-wk-day= '" + day_attr + "']");
+        var all_available = true;
 
 
+
+        //CHECK to see if the column contains any unavailable cells
         for (var i = 0; i < day_cell_match.length; i++) {
-            change_state(day_cell_match[i]);
+            if(day_cell_match[i].classList.contains('available')){
+                all_available = true;
+            } else{
+                all_available = false;
+                break;
+            }
+        }
+
+
+        //IF column contains a single unavailable, change
+        //  all cells to available
+        //Else, change all cells to unavailable
+        for (var k = 0; k < day_cell_match.length; k++) {
+            if(all_available){
+                change_state(day_cell_match[k], 'unavailable');
+            }
+            else{
+                change_state(day_cell_match[k], 'available');
+            }
         }
     }
 
@@ -147,7 +218,7 @@
 
 
         //GET dom elements
-        var wk_id         = this.options.element_id;
+        var wk_id         = this.options.wk_id;
         var wk_cell       = document.getElementById(wk_id).getElementsByClassName('wk-cell');
         var table         = document.getElementById(wk_id).getElementsByClassName('weekli');
         var time_column   = document.getElementById(wk_id).getElementsByClassName('wk-time');
@@ -158,6 +229,7 @@
         for (var i = 0; i < wk_cell.length; i++) {
             wk_cell[i].addEventListener('mousedown', mouse_down_cell, false);
             wk_cell[i].addEventListener('mouseover', mouse_hover_cell, false);
+            wk_cell[i].wk_id = wk_id;
         }
 
         //ADD event listener to table for dragging functionality
@@ -168,13 +240,13 @@
         //ADD event listener to time column to toggle row on click
         for (var k = 0; k < time_column.length; k++) {
             time_column[k].addEventListener('mousedown',time_row_mousedown, false);
-            time_column[k].element_id = wk_id;
+            time_column[k].wk_id = wk_id;
         }
 
         //ADD event listener to time column to toggle row on click
         for (var l = 0; l < day_column.length; l++) {
             day_column[l].addEventListener('mousedown',day_column_mousedown, false);
-            day_column[l].element_id = wk_id;
+            day_column[l].wk_id = wk_id;
         }
 
     }
