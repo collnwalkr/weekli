@@ -30,9 +30,6 @@ table.weekli{
     background-color: @unavailable-color;
   }
 
-  .wk-cell:hover{
-    cursor: pointer;
-  }
 
   .wk-cell.available{
     background-color: @available-color;
@@ -40,6 +37,15 @@ table.weekli{
 
 }
 
+table.weekli.weekli_editable{
+  .wk-cell:hover{
+    cursor: pointer;
+  }
+}
+
+table.weekli.weekli_uneditable{
+
+}
 
 
 table.weekli_desktop{
@@ -73,15 +79,17 @@ table.weekli_desktop{
     }
   }
 
-  &:hover{
-    cursor: pointer;
-  }
-
   th.wk-day, td.wk-time{
     background-color: @cell-color;
     padding: 10px;
   }
 
+}
+
+table.weekli_desktop.weekli_editable{
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 table.weekli_mobile{
@@ -92,10 +100,6 @@ table.weekli_mobile{
 
   @media @tablet, @desktop, @desktop-xl{
     display: none;
-  }
-
-  th.wk-day:hover{
-    cursor: pointer;
   }
 
   th.wk-day, td.wk-time {
@@ -109,5 +113,11 @@ table.weekli_mobile{
     text-align: right;
   }
 
+}
+
+table.weekli_mobile.weekli_editable{
+  th.wk-day:hover{
+    cursor: pointer;
+  }
 }
 

@@ -15,6 +15,7 @@
             week: 'week',
             time_interval: '60',
             time_range: '7,17',
+            editable: true,
             time_format: '12hour'
         };
 
@@ -26,8 +27,18 @@
     // Public Methods
     /////////////////////////////
     Weekli.prototype.build = function() {
-        buildOut.call(this);
-        initializeEvents.call(this);
+
+        //IF the build is successful
+        if(buildOut.call(this)){
+
+            //IF weekli is editable, add events
+            //ELSE remove events
+            if(this.options.editable){
+                addEvents.call(this);
+            } else{
+                removeEvents.call(this);
+            }
+        }
     };
 
 
@@ -64,6 +75,25 @@
         return output;
     };
 
+    Weekli.prototype.make_uneditable = function(){
+        removeEvents.call(this);
+    };
+
+    Weekli.prototype.make_editable = function(){
+        addEvents.call(this);
+    };
+
+    Weekli.prototype.load_data = function(data){
+        loadData(data, this);
+    };
+
+    Weekli.prototype.all_available = function(){
+        changeAll('available', this);
+    };
+
+    Weekli.prototype.all_unavailable = function(){
+        changeAll('unavailable', this);
+    };
 
     /////////////////////////////
     // Private Methods
@@ -72,17 +102,24 @@
     var wk_dragging_state;
 
     function buildOut() {
+        //GET parent div
         var parent_div  = document.getElementById(this.options.wk_id);
-        this.weekli  = document.createElement('div');
-        var html = buildHTML(this);
-        this.weekli.appendChild(html.desktop);
-        this.weekli.appendChild(html.mobile);
+        this.weekli     = document.createElement('div');
 
 
         if(parent_div){
+            //SCAFFOLD out the html
+            var html = buildHTML(this);
+            this.weekli.appendChild(html.desktop);
+            this.weekli.appendChild(html.mobile);
+
             parent_div.appendChild(this.weekli);
+
+            return true;
         } else{
-            console.error('wk_id: ' + this.options.wk_id + ' not found');
+            console.error('wk_id: ' + this.options.wk_id + ' element not found');
+
+            return false;
         }
 
     }
@@ -111,7 +148,6 @@
 
     //HANDLE mousing over cell
     function mouse_hover_cell(evt){
-        var attribute = this.getAttribute('data-wk-val');
         var cell_state;
 
         //GET the current state (available or unavailable) of the current cell
@@ -240,8 +276,7 @@
     /////////////////////////////
     // Set events
     /////////////////////////////
-    function initializeEvents() {
-
+    function addEvents() {
 
         //GET dom elements
         var wk_id         = this.options.wk_id;
@@ -281,7 +316,67 @@
             day_column[l].wk_id = wk_id;
         }
 
+        //GIVE weekli divs editable class
+        var weekli_div = document.getElementById(wk_id).getElementsByClassName('weekli');
+        for(var n = 0; n < weekli_div.length; n++){ 
+            weekli_div[n].classList.remove('weekli_uneditable');
+            weekli_div[n].classList.add('weekli_editable');
+        }
+
     }
+
+    /////////////////////////////
+    // Set events
+    /////////////////////////////
+    function removeEvents() {
+
+        //GET dom elements
+        var wk_id         = this.options.wk_id;
+        var wk_cell       = document.getElementById(wk_id).getElementsByClassName('wk-cell');
+        var table         = document.getElementById(wk_id).getElementsByClassName('weekli');
+        var time_row      = document.getElementById(wk_id).getElementsByClassName('wk-time');
+        var day_column    = document.getElementById(wk_id).getElementsByClassName('wk-day');
+
+
+        //REMOVE event listener to table cells
+        for (var i = 0; i < wk_cell.length; i++) {
+            wk_cell[i].removeEventListener('mousedown', mouse_down_cell, false);
+            wk_cell[i].removeEventListener('mouseover', mouse_hover_cell, false);
+            wk_cell[i].wk_id = wk_id;
+        }
+
+        //REMOVE event listener to table for dragging functionality
+        for (var j = 0; j < table.length; j++) {
+            table[j].removeEventListener('mousedown',table_mousedown, false);
+        }
+
+        //REMOVE event listener to time column to toggle row on click
+        for (var k = 0; k < time_row.length; k++) {
+            time_row[k].removeEventListener('mousedown',time_row_mousedown, false);
+            time_row[k].wk_id = wk_id;
+        }
+
+        //REMOVE event listener to time column to toggle row on click
+        for (var l = 0; l < day_column.length; l++) {
+            day_column[l].removeEventListener('mousedown',day_column_mousedown, false);
+
+            //ADD event listener to span children
+            for(var m = 0; m < day_column[l].childNodes.length; m++){
+                day_column[l].childNodes[m].removeEventListener('mousedown',day_column_mousedown, false);
+                day_column[l].childNodes[m].wk_id = wk_id;
+            }
+            day_column[l].wk_id = wk_id;
+        }
+
+        //GIVE weekli divs uneditable class
+        var weekli_div = document.getElementById(wk_id).getElementsByClassName('weekli');
+        for(var n = 0; n < weekli_div.length; n++){
+            weekli_div[n].classList.remove('weekli_editable');
+            weekli_div[n].classList.add('weekli_uneditable');
+        }
+    }
+
+
 
     /////////////////////////////
     // Get Custom Options
@@ -305,18 +400,19 @@
         var time_interval   = weekli.options.time_interval;
         var time_format     = weekli.options.time_format;
         var custom_days     = weekli.options.week_days;
+
         var weekli_days     = get_days_array(week_type, custom_days);
         var weekli_hours    = get_hour_array(time_range, time_interval, time_format);
 
         var desktop_html = buildHTMLdesktop(weekli_days, weekli_hours);
         var mobile_html  = buildHTMLmobile(weekli_days, weekli_hours);
-        var weekli_html  = {'desktop': desktop_html, 'mobile': mobile_html};
 
-
-        return weekli_html;
+        return {'desktop': desktop_html, 'mobile': mobile_html};
     }
 
-    //RETURNS table for desktop
+    /////////////////////////////
+    // returns table for desktop
+    /////////////////////////////
     function buildHTMLdesktop(weekli_days, weekli_hours){
         var table = document.createElement('table');
         table.className = 'weekli weekli_desktop';
@@ -404,7 +500,9 @@
         return table;
     }
 
-    //RETURNS table for mobile
+    /////////////////////////////
+    // returns table for mobile
+    /////////////////////////////
     function buildHTMLmobile(weekli_days, weekli_hours){
         //CREATE table and tbody
         var table   = document.createElement('table');
@@ -471,7 +569,10 @@
         return table;
     }
 
-    //RETURN an array of days based of week type option
+    /////////////////////////////
+    // returns an array of days
+    // based of week type option
+    /////////////////////////////
     function get_days_array(week_type, custom_days){
         var weekli_days = [];
         switch(week_type){
@@ -493,7 +594,11 @@
         return weekli_days;
     }
 
-    //RETURN an array of hours based off time range, intervals, and format
+    /////////////////////////////
+    // returns an array of hours
+    // based off time range,
+    // intervals, and format
+    /////////////////////////////
     function get_hour_array(time_range, time_interval, time_format){
         var weekli_hours = [];
 
@@ -567,8 +672,54 @@
             weekli_hours.push(print_hour + ':' + print_minute);
         //end add stop time
 
-
         return weekli_hours;
+    }
+
+    /////////////////////////////
+    // takes JSON object and
+    // updates table accordingly
+    /////////////////////////////
+    function loadData(data, weekli){
+
+        //CLEAR table
+        changeAll('unavailable', weekli);
+
+        //GET the div
+        var wk_id = weekli.options.wk_id;
+
+        // loop over each object
+        for(var i = 0; i < data.available.length; i++) {
+            var obj = data.available[i];
+            //extract time and day data attribute
+            var time_attr = obj.time;
+            var day_attr  = obj.day;
+
+            //find all cells that match those attributes in the div
+            var cell_match = document.getElementById(wk_id).querySelectorAll("[data-wk-hr= '" + time_attr + "'][data-wk-day= '" + day_attr + "']");
+
+            //change those states to available
+            for (var j = 0; j < cell_match.length; j++) {
+                change_state(cell_match[j], 'available');
+            }
+
+        }
+    }
+
+    /////////////////////////////
+    // change all cells to certain
+    // value
+    /////////////////////////////
+    function changeAll(newvalue,weekli){
+        //GET the div
+        var wk_id = weekli.options.wk_id;
+
+        //find all cells that match those attributes in the div
+        var cell_match = document.getElementById(wk_id).getElementsByClassName('wk-cell');
+
+        //change those states to available
+        for (var j = 0; j < cell_match.length; j++) {
+            change_state(cell_match[j], newvalue);
+        }
     }
 
 }());
