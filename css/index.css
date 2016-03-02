@@ -10,11 +10,11 @@ table.weekli {
   -ms-user-select: none;
   user-select: none;
 }
-table.weekli:hover {
-  cursor: pointer;
-}
-table.weekli td {
+table.weekli .wk-cell {
   background-color: #FF6138;
+}
+table.weekli .wk-cell:hover {
+  cursor: pointer;
 }
 table.weekli .wk-cell.available {
   background-color: #79BD8F;
@@ -48,6 +48,9 @@ table.weekli .wk-cell.available {
     display: none;
   }
 }
+table.weekli_desktop:hover {
+  cursor: pointer;
+}
 table.weekli_desktop th.wk-day,
 table.weekli_desktop td.wk-time {
   background-color: #f9f9f9;
@@ -63,13 +66,16 @@ table.weekli_desktop td.wk-time {
     display: none;
   }
 }
+table.weekli_mobile th.wk-day:hover {
+  cursor: pointer;
+}
 table.weekli_mobile th.wk-day,
 table.weekli_mobile td.wk-time {
   background-color: #f9f9f9;
   padding: 10px;
 }
 table.weekli_mobile th.wk-day {
-  background-color: grey;
+  background-color: #383838;
   color: white;
   text-align: right;
 }

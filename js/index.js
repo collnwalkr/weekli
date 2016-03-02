@@ -5,7 +5,9 @@ var weekli = new Weekli();
 
 var weekli_id = new Weekli({
     wk_id: 'id',
-    week: 'weekend'
+    week: 'workweek',
+    time_interval: 5,
+    time_range: '1,9'
 });
 
 var weekli_work = new Weekli({
@@ -14,6 +16,6 @@ var weekli_work = new Weekli({
 });
 
 
+weekli_id.build();
 weekli.build();
-//weekli_id.build();
 //weekli_work.build();

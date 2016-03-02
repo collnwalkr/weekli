@@ -13,9 +13,9 @@
         var defaults = {
             wk_id: 'weekli',
             week: 'week',
-            time_interval: 'hour_1',
-            closeButton: true,
-            time_range: '0,24'
+            time_interval: '60',
+            time_range: '7,17',
+            time_format: '12'
         };
 
         // Create options by extending defaults with the passed in arguments
@@ -74,7 +74,9 @@
     function buildOut() {
         var parent_div  = document.getElementById(this.options.wk_id);
         this.weekli  = document.createElement('div');
-        //this.weekli.innerHTML = buildHTML(this);
+        var html = buildHTML(this);
+        this.weekli.appendChild(html);
+        console.log(html);
 
 
         if(parent_div){
@@ -298,24 +300,138 @@
     // Weekli HTML structure
     /////////////////////////////
     function buildHTML(weekli){
-        var weekli_html = '';
-        var week_type = weekli.options.week;
+        var week_type       = weekli.options.week;
+        var time_range      = weekli.options.time_range;
+        var time_interval   = weekli.options.time_interval;
+        var time_format     = weekli.options.time_format;
+        var weekli_days     = get_days_array(week_type);
+        var weekli_hours    = get_hour_array(time_range, time_interval, time_format);
 
-        switch(week_type){
-            case 'workweek':
-                weekli_html = '5';
-                break;
+        var desktop_html = buildHTMLdesktop(weekli_days, time_range, time_interval, time_format);
+        var weekli_html = desktop_html;
 
-            case 'weekend':
-                weekli_html = '2';
-                break;
-
-            default:
-                weekli_html = '7';
-        }
 
         return weekli_html;
     }
 
+    function buildHTMLdesktop(weekli_days, time_range, time_interval, time_format){
+        var table = document.createElement('table');
+        table.className = 'weekli weekli_desktop';
+
+        //CREATE thead and add column
+        var thead = document.createElement('thead');
+        var th = document.createElement('th');
+        var tbody = document.createElement('tbody');
+        var span_long;
+        var span_abbrv;
+        var day_abbrv = '';
+        var day_long  = '';
+
+        //ADD blank cell column (empty one in top left)
+        th.className = 'wk-day';
+        thead.appendChild(th);
+
+        //ADD day columns
+        for(var i = 0; i < weekli_days.length; i++){
+            day_long = weekli_days[i];
+
+            th = document.createElement('th');
+            th.className = 'wk-day wk-column';
+
+            //GET week abbreviation
+            day_abbrv = day_long.substr(0,3);
+
+            //SET week day column attribute to week day abbreviated
+            th.setAttribute('data-wk-day-col', day_abbrv.toUpperCase());
+
+            //CREATE span of abbreviated and long form week day names
+            span_abbrv = document.createElement('span');
+            span_abbrv.className = 'wk-day-abbrv';
+            span_abbrv.innerHTML = day_abbrv;
+            span_long = document.createElement('span');
+            span_long.className = 'wk-day-long';
+            span_long.innerHTML = day_long;
+
+            //PUT spans in th
+            th.appendChild(span_abbrv);
+            th.appendChild(span_long);
+
+            //PUT th in thead
+            thead.appendChild(th);
+        }
+
+
+
+        //PUT thead in table
+        table.appendChild(thead);
+
+        return table;
+    }
+
+    //RETURN an array of days based of week type option
+    function get_days_array(week_type){
+        var weekli_days = [];
+        switch(week_type){
+            case 'workweek':
+                weekli_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+                break;
+
+            case 'weekend':
+                weekli_days = ['Saturday', 'Sunday'];
+                break;
+
+            default:
+                weekli_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        }
+        return weekli_days;
+    }
+
+    //RETURN an array of hours based off time range, intervals, and format
+    function get_hour_array(time_range, time_interval, time_format){
+        var weekli_hours = [];
+
+        //CALCULATE the interval between times when creating array
+        var hour_interval       = Math.floor(time_interval / 60);
+        var minutes_interval    = time_interval - hour_interval * 60;
+        var minutes_fraction    = 60 / minutes_interval;
+        minutes_fraction        = 1 / minutes_fraction;
+        time_interval           = hour_interval + minutes_fraction;
+
+        console.log(time_interval);
+        time_interval           = (Math.round(time_interval*1000)/1000);
+
+        console.log(time_interval);
+
+
+        //CALCULATE and push times into weekli_hours array
+        var start_stop   = time_range.split(',');
+        var start        = parseInt(start_stop[0]);
+        var stop         = parseInt(start_stop[1]);
+        var minute;
+        var hour;
+        var i = start;
+        var pretty_time;
+        while(i < stop){
+
+            hour   = Math.floor(i);
+
+            minute = Math.ceil((i % 1) * 60);
+            console.log(minute);
+            if(minute >= 60){ minute -= 60; hour += 1; }
+            if(minute < 10){ minute = '0' + minute; }
+            pretty_time = hour + ':' + minute;
+
+            weekli_hours.push(pretty_time);
+
+            console.log(i);
+            i += time_interval;
+        } //end while
+
+
+
+        console.log(weekli_hours);
+
+        return weekli_hours;
+    }
 
 }());

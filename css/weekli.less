@@ -3,6 +3,7 @@
 @cell-color: #f9f9f9;
 @unavailable-color: #FF6138;
 @available-color: #79BD8F;
+@mobile-header-color: #383838;
 
 
 // BREAKPOINTS
@@ -24,12 +25,13 @@ table.weekli{
   -ms-user-select: none;
   user-select: none;
 
-  &:hover {
-    cursor: pointer;
+
+  .wk-cell{
+    background-color: @unavailable-color;
   }
 
-  td{
-    background-color: @unavailable-color;
+  .wk-cell:hover{
+    cursor: pointer;
   }
 
   .wk-cell.available{
@@ -71,6 +73,10 @@ table.weekli_desktop{
     }
   }
 
+  &:hover{
+    cursor: pointer;
+  }
+
   th.wk-day, td.wk-time{
     background-color: @cell-color;
     padding: 10px;
@@ -88,13 +94,17 @@ table.weekli_mobile{
     display: none;
   }
 
-  th.wk-day, td.wk-time{
+  th.wk-day:hover{
+    cursor: pointer;
+  }
+
+  th.wk-day, td.wk-time {
     background-color: @cell-color;
     padding: 10px;
   }
 
   th.wk-day{
-    background-color: grey;
+    background-color: @mobile-header-color;
     color: white;
     text-align: right;
   }
