@@ -15,7 +15,7 @@
             week: 'week',
             time_interval: '60',
             time_range: '7,17',
-            time_format: '12'
+            time_format: '12hour'
         };
 
         // Create options by extending defaults with the passed in arguments
@@ -75,8 +75,8 @@
         var parent_div  = document.getElementById(this.options.wk_id);
         this.weekli  = document.createElement('div');
         var html = buildHTML(this);
-        this.weekli.appendChild(html);
-        console.log(html);
+        this.weekli.appendChild(html.desktop);
+        this.weekli.appendChild(html.mobile);
 
 
         if(parent_div){
@@ -304,24 +304,26 @@
         var time_range      = weekli.options.time_range;
         var time_interval   = weekli.options.time_interval;
         var time_format     = weekli.options.time_format;
-        var weekli_days     = get_days_array(week_type);
+        var custom_days     = weekli.options.week_days;
+        var weekli_days     = get_days_array(week_type, custom_days);
         var weekli_hours    = get_hour_array(time_range, time_interval, time_format);
 
-        var desktop_html = buildHTMLdesktop(weekli_days, time_range, time_interval, time_format);
-        var weekli_html = desktop_html;
+        var desktop_html = buildHTMLdesktop(weekli_days, weekli_hours);
+        var mobile_html  = buildHTMLmobile(weekli_days, weekli_hours);
+        var weekli_html  = {'desktop': desktop_html, 'mobile': mobile_html};
 
 
         return weekli_html;
     }
 
-    function buildHTMLdesktop(weekli_days, time_range, time_interval, time_format){
+    //RETURNS table for desktop
+    function buildHTMLdesktop(weekli_days, weekli_hours){
         var table = document.createElement('table');
         table.className = 'weekli weekli_desktop';
 
         //CREATE thead and add column
-        var thead = document.createElement('thead');
-        var th = document.createElement('th');
-        var tbody = document.createElement('tbody');
+        var thead   = document.createElement('thead');
+        var th      = document.createElement('th');
         var span_long;
         var span_abbrv;
         var day_abbrv = '';
@@ -360,16 +362,117 @@
             thead.appendChild(th);
         }
 
+        //CREATE tbody
+        var tbody   = document.createElement('tbody');
+        var td;
+        var tr;
+        var day_attr;
+        var hour_attr;
+        //ADD hour rows to tbody
+        for(var k = 0; k < weekli_hours.length - 1; k++){
+            //CREATE the hour attribute using the current time and next time
+            hour_attr = weekli_hours[k] + '-' + weekli_hours[k+1];
+            //start time row cell
+            td = document.createElement('td');
+            tr = document.createElement('tr');
+            td.setAttribute('data-wk-time-row', hour_attr);
+            td.innerHTML = weekli_hours[k] + '-' + weekli_hours[k+1];
+            td.className = 'wk-time wk-column';
+            tr.appendChild(td);
+            //end time row cell
 
+            for(var j = 0; j < weekli_days.length; j++){
+                //CREATE the day attribute using first 3 chars of day name
+                day_attr = weekli_days[j].substr(0,3).toUpperCase();
+                //start table cell
+                td = document.createElement('td');
+                td.setAttribute('data-wk-hr', hour_attr);
+                td.setAttribute('data-wk-day', day_attr);
+                td.className = 'wk-cell';
+                tr.appendChild(td);
+                //end table cell
+            }
+
+            //add row to tbody
+            tbody.appendChild(tr);
+        }
 
         //PUT thead in table
         table.appendChild(thead);
+        table.appendChild(tbody);
+
+        return table;
+    }
+
+    //RETURNS table for mobile
+    function buildHTMLmobile(weekli_days, weekli_hours){
+        //CREATE table and tbody
+        var table   = document.createElement('table');
+        var tbody   = document.createElement('tbody');
+        var td;
+        var tr;
+        var th;
+        var day_attr;
+        var hour_attr;
+
+        table.className = 'weekli weekli_mobile';
+
+        //ADD day rows
+        for(var i = 0; i < weekli_days.length; i++) {
+            //CREATE day attribute using first 3 chars of day name
+            day_attr = weekli_days[i].substr(0, 3).toUpperCase();
+
+            //start day header row
+            tr = document.createElement('tr');
+            th = document.createElement('th');
+            th.setAttribute('data-wk-day-col', day_attr);
+            th.className = 'wk-day wk-column';
+            th.colSpan = 2;
+            th.innerHTML = weekli_days[i];
+            tr.appendChild(th);
+            //end day header row
+
+            //attach day header row to body
+            tbody.appendChild(tr);
+
+
+            //ADD hour rows
+            for (var k = 0; k < weekli_hours.length - 1; k++) {
+                //CREATE the hour attribute using the current time and next time
+                hour_attr = weekli_hours[k] + '-' + weekli_hours[k+1];
+                //start time cell
+                tr = document.createElement('tr');
+                td = document.createElement('td');
+                td.className = 'wk-time wk-column';
+                td.innerHTML = hour_attr;
+                //end time cell
+
+                //attach time cell to row
+                tr.appendChild(td);
+
+                //start table cell
+                td = document.createElement('td');
+                td.setAttribute('data-wk-hr',  hour_attr);
+                td.setAttribute('data-wk-day', day_attr);
+                td.className = 'wk-cell';
+                //end table cell
+
+                //attach cell to row
+                tr.appendChild(td);
+
+                //attach row to tbody
+                tbody.appendChild(tr);
+            }
+        }
+
+        //PUT thead in table
+        table.appendChild(tbody);
 
         return table;
     }
 
     //RETURN an array of days based of week type option
-    function get_days_array(week_type){
+    function get_days_array(week_type, custom_days){
         var weekli_days = [];
         switch(week_type){
             case 'workweek':
@@ -378,6 +481,10 @@
 
             case 'weekend':
                 weekli_days = ['Saturday', 'Sunday'];
+                break;
+
+            case 'custom':
+                weekli_days = custom_days;
                 break;
 
             default:
@@ -393,43 +500,73 @@
         //CALCULATE the interval between times when creating array
         var hour_interval       = Math.floor(time_interval / 60);
         var minutes_interval    = time_interval - hour_interval * 60;
-        var minutes_fraction    = 60 / minutes_interval;
-        minutes_fraction        = 1 / minutes_fraction;
-        time_interval           = hour_interval + minutes_fraction;
-
-        console.log(time_interval);
-        time_interval           = (Math.round(time_interval*1000)/1000);
-
-        console.log(time_interval);
-
 
         //CALCULATE and push times into weekli_hours array
         var start_stop   = time_range.split(',');
-        var start        = parseInt(start_stop[0]);
-        var stop         = parseInt(start_stop[1]);
-        var minute;
-        var hour;
-        var i = start;
-        var pretty_time;
-        while(i < stop){
+        var start_time   = parseFloat(start_stop[0]);
+        var stop_time    = parseFloat(start_stop[1]);
+        var current_time = start_time;
+        var current_hour    = Math.floor(current_time);
+        var current_minute  = Math.floor((current_time % 1) * 100);
+        var print_hour;
+        var print_minute;
 
-            hour   = Math.floor(i);
+        //KEEP adding times into array and incrementing by intervals
+        while(current_time < stop_time){
 
-            minute = Math.ceil((i % 1) * 60);
-            console.log(minute);
-            if(minute >= 60){ minute -= 60; hour += 1; }
-            if(minute < 10){ minute = '0' + minute; }
-            pretty_time = hour + ':' + minute;
+            //IF minute is less than 10, put a 0 in front
+            if(current_minute < 10){
+                print_minute = '0' + current_minute;
+            } else{
+                print_minute = current_minute;
+            }
 
-            weekli_hours.push(pretty_time);
+            //IF 12 hour format, put hours in that format
+            if(time_format === '12hour' && current_hour > 12){
+                print_hour = current_hour - 12;
+            } else{
+                print_hour = current_hour;
+            }
 
-            console.log(i);
-            i += time_interval;
+            //PUSH the pretty print version of the calculated time
+            weekli_hours.push(print_hour + ':' + print_minute);
+
+            //ADD the minutes interval
+            current_minute += minutes_interval;
+
+            //IF this new time is more then an hour, increase hour
+            //and decrease minutes by 60
+            if(current_minute >= 60){
+                current_minute -= 60;
+                current_hour += 1;
+            }
+
+            //ADD the hour interval
+            current_hour += hour_interval;
+
+            //CALCULATE the new current time
+            current_time = current_hour + (current_minute / 100);
+
         } //end while
 
 
+        //ADD the stop time to the end of the array
+            current_minute = Math.ceil((stop_time % 1) * 100);
+            if(current_minute < 10){
+                print_minute = '0' + current_minute;
+            } else{
+                print_minute = current_minute;
+            }
 
-        console.log(weekli_hours);
+            current_hour = Math.floor(stop_time);
+            if(time_format === '12hour' && current_hour > 12){
+                print_hour = current_hour - 12;
+            } else{
+                print_hour = current_hour;
+            }
+            weekli_hours.push(print_hour + ':' + print_minute);
+        //end add stop time
+
 
         return weekli_hours;
     }

@@ -5,9 +5,10 @@ var weekli = new Weekli();
 
 var weekli_id = new Weekli({
     wk_id: 'id',
-    week: 'workweek',
-    time_interval: 5,
-    time_range: '1,9'
+    week: 'custom',
+    week_days: ['Saturday', 'Tuesday', 'Friday'],
+    time_interval: 20,
+    time_range: '10.30,13.10'
 });
 
 var weekli_work = new Weekli({
