@@ -19,12 +19,12 @@ table.weekli .wk-cell.available {
 table.weekli.weekli_editable .wk-cell:hover {
   cursor: pointer;
 }
-@media (max-width: 529px) {
+@media only screen and (max-width: 599px) {
   table.weekli_desktop {
     display: none;
   }
 }
-@media (min-width: 530px) and (max-width: 649px), (min-width: 650px) and (max-width: 849px), (min-width: 850px) {
+@media only screen and (min-width: 600px) and (max-width: 649px), only screen and (min-width: 650px) and (max-width: 849px), only screen and (min-width: 850px) {
   table.weekli_desktop {
     display: table;
   }
@@ -35,12 +35,12 @@ table.weekli.weekli_editable .wk-cell:hover {
     display: inline-block;
   }
 }
-@media (min-width: 650px) and (max-width: 849px) {
+@media only screen and (min-width: 650px) and (max-width: 849px) {
   table.weekli_desktop .wk-day {
     font-size: 0.75em;
   }
 }
-@media (min-width: 530px) and (max-width: 649px) {
+@media only screen and (min-width: 600px) and (max-width: 649px) {
   table.weekli_desktop .wk-day-abbrv {
     display: inline-block;
   }
@@ -56,12 +56,12 @@ table.weekli_desktop td.wk-time {
 table.weekli_desktop.weekli_editable:hover {
   cursor: pointer;
 }
-@media (max-width: 529px) {
+@media only screen and (max-width: 599px) {
   table.weekli_mobile {
     display: table;
   }
 }
-@media (min-width: 530px) and (max-width: 649px), (min-width: 650px) and (max-width: 849px), (min-width: 850px) {
+@media only screen and (min-width: 600px) and (max-width: 649px), only screen and (min-width: 650px) and (max-width: 849px), only screen and (min-width: 850px) {
   table.weekli_mobile {
     display: none;
   }
