@@ -1,28 +1,23 @@
 /**
  * Created by Collin Walker
  */
+
+
 //var weekli = new Weekli();
+//weekli.build();
 
 var weekli_id = new Weekli({
     wk_id: 'id',
-    week: 'custom',
+    week: 'workweek',
     week_days: ['Saturday', 'Tuesday', 'Friday'],
-    time_interval: 20,
-    time_range: '10.30,13.10'
+    minute_interval: 60,
+    time_range: '7,13'
 });
 
-var weekli_work = new Weekli({
-    wk_id: 'work',
-    week: 'workweek'
-});
-
-var dummydata = {"available":[{"day":"SAT","time":"10:50-11:10"},{"day":"FRI","time":"10:50-11:10"},{"day":"SAT","time":"11:50-12:10"},{"day":"FRI","time":"11:50-12:10"},{"day":"SAT","time":"12:10-12:30"},{"day":"TUE","time":"12:10-12:30"},{"day":"FRI","time":"12:10-12:30"}],"unavailable":[{"day":"SAT","time":"10:30-10:50"},{"day":"TUE","time":"10:30-10:50"},{"day":"FRI","time":"10:30-10:50"},{"day":"TUE","time":"10:50-11:10"},{"day":"SAT","time":"11:10-11:30"},{"day":"TUE","time":"11:10-11:30"},{"day":"FRI","time":"11:10-11:30"},{"day":"SAT","time":"11:30-11:50"},{"day":"TUE","time":"11:30-11:50"},{"day":"FRI","time":"11:30-11:50"},{"day":"TUE","time":"11:50-12:10"},{"day":"SAT","time":"12:30-12:50"},{"day":"TUE","time":"12:30-12:50"},{"day":"FRI","time":"12:30-12:50"},{"day":"SAT","time":"12:50-1:10"},{"day":"TUE","time":"12:50-1:10"},{"day":"FRI","time":"12:50-1:10"}]};
+var dummydata = {"available":[{"day":"MON","time":"7:00-8:00"},{"day":"THU","time":"7:00-8:00"},{"day":"MON","time":"8:00-9:00"},{"day":"THU","time":"8:00-9:00"},{"day":"TUE","time":"10:00-11:00"},{"day":"WED","time":"10:00-11:00"},{"day":"FRI","time":"10:00-11:00"},{"day":"WED","time":"11:00-12:00"}],"unavailable":[{"day":"TUE","time":"7:00-8:00"},{"day":"WED","time":"7:00-8:00"},{"day":"FRI","time":"7:00-8:00"},{"day":"TUE","time":"8:00-9:00"},{"day":"WED","time":"8:00-9:00"},{"day":"FRI","time":"8:00-9:00"},{"day":"MON","time":"9:00-10:00"},{"day":"TUE","time":"9:00-10:00"},{"day":"WED","time":"9:00-10:00"},{"day":"THU","time":"9:00-10:00"},{"day":"FRI","time":"9:00-10:00"},{"day":"MON","time":"10:00-11:00"},{"day":"THU","time":"10:00-11:00"},{"day":"MON","time":"11:00-12:00"},{"day":"TUE","time":"11:00-12:00"},{"day":"THU","time":"11:00-12:00"},{"day":"FRI","time":"11:00-12:00"},{"day":"MON","time":"12:00-1:00"},{"day":"TUE","time":"12:00-1:00"},{"day":"WED","time":"12:00-1:00"},{"day":"THU","time":"12:00-1:00"},{"day":"FRI","time":"12:00-1:00"}]};
 
 weekli_id.build();
 
 var load_data = function(){
     weekli_id.load_data(dummydata);
 };
-
-//weekli.build();
-//weekli_work.build();

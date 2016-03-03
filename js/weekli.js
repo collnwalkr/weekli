@@ -13,7 +13,7 @@
         var defaults = {
             wk_id: 'weekli',
             week: 'week',
-            time_interval: '60',
+            minute_interval: '60',
             time_range: '7,17',
             editable: true,
             time_format: '12hour'
@@ -397,12 +397,12 @@
     function buildHTML(weekli){
         var week_type       = weekli.options.week;
         var time_range      = weekli.options.time_range;
-        var time_interval   = weekli.options.time_interval;
+        var minute_interval = weekli.options.minute_interval;
         var time_format     = weekli.options.time_format;
         var custom_days     = weekli.options.week_days;
 
         var weekli_days     = get_days_array(week_type, custom_days);
-        var weekli_hours    = get_hour_array(time_range, time_interval, time_format);
+        var weekli_hours    = get_hour_array(time_range, minute_interval, time_format);
 
         var desktop_html = buildHTMLdesktop(weekli_days, weekli_hours);
         var mobile_html  = buildHTMLmobile(weekli_days, weekli_hours);
@@ -434,7 +434,7 @@
             day_long = weekli_days[i];
 
             th = document.createElement('th');
-            th.className = 'wk-day wk-column';
+            th.className = 'wk-day wk-header';
 
             //GET week abbreviation
             day_abbrv = day_long.substr(0,3);
@@ -473,7 +473,7 @@
             tr = document.createElement('tr');
             td.setAttribute('data-wk-time-row', hour_attr);
             td.innerHTML = weekli_hours[k] + '-' + weekli_hours[k+1];
-            td.className = 'wk-time wk-column';
+            td.className = 'wk-time wk-header';
             tr.appendChild(td);
             //end time row cell
 
@@ -524,7 +524,7 @@
             tr = document.createElement('tr');
             th = document.createElement('th');
             th.setAttribute('data-wk-day-col', day_attr);
-            th.className = 'wk-day wk-column';
+            th.className = 'wk-day wk-header';
             th.colSpan = 2;
             th.innerHTML = weekli_days[i];
             tr.appendChild(th);
@@ -541,7 +541,7 @@
                 //start time cell
                 tr = document.createElement('tr');
                 td = document.createElement('td');
-                td.className = 'wk-time wk-column';
+                td.className = 'wk-time wk-header';
                 td.innerHTML = hour_attr;
                 //end time cell
 
@@ -599,12 +599,12 @@
     // based off time range,
     // intervals, and format
     /////////////////////////////
-    function get_hour_array(time_range, time_interval, time_format){
+    function get_hour_array(time_range, minute_interval, time_format){
         var weekli_hours = [];
 
         //CALCULATE the interval between times when creating array
-        var hour_interval       = Math.floor(time_interval / 60);
-        var minutes_interval    = time_interval - hour_interval * 60;
+        var hour_interval       = Math.floor(minute_interval / 60);
+        var minutes_interval    = minute_interval - hour_interval * 60;
 
         //CALCULATE and push times into weekli_hours array
         var start_stop   = time_range.split(',');
@@ -686,7 +686,7 @@
 
         //GET the div
         var wk_id = weekli.options.wk_id;
-
+        
         // loop over each object
         for(var i = 0; i < data.available.length; i++) {
             var obj = data.available[i];
