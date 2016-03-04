@@ -12,6 +12,20 @@ module.exports = function(grunt) {
             }
         },
 
+
+        //MINIFY javascript files
+        uglify: {
+            options: {
+                mangle: false
+            },
+            my_target: {
+                files: {
+                    'js/weekli.min.js': ['js/weekli.js']
+                }
+            }
+        },
+
+
         //COMPILE less
         less: {
             // production config is also available
@@ -21,8 +35,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     //compilation.css  :  source.less
-                    "css/weekli.css": "css/weekli.less",
-                    "css/index.css": "css/index.less"
+                    "css/weekli.css": "css/weekli.less"
                 }
             }
         },
@@ -43,10 +56,11 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-    grunt.registerTask('default', ['jshint', 'less','connect', 'watch']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'less','connect', 'watch']);
 };

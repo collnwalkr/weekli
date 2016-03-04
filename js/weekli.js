@@ -4,11 +4,11 @@
 
 (function() {
 
+
     /////////////////////////////
     // Constructor
     /////////////////////////////
     this.Weekli = function() {
-
         // Option defaults
         var defaults = {
             wk_id: 'weekli',
