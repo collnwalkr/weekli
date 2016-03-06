@@ -1,7 +1,6 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
-
         //LINT javascript files
         jshint: {
             files: ['Gruntfile.js', 'js/*.js'],
