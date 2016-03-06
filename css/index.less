@@ -1,34 +1,32 @@
 /////////////////////////////
-// VARIABLES
+// IMPORTS
 /////////////////////////////
-@red-color: #FF6138;
-@light-green: #BEEB9F;
-@mid-green: #79BD8F;
-@dark-green: #00A388;
-
+@import "fonts.css";
 @import "weekli.less";
 
+
+
+/////////////////////////////
+// VARIABLES
+/////////////////////////////
+@light-purple: #B86CAC;
+@dark-purple: #6e2c6b;
+@white: #FFFFFF;
 
 /////////////////////////////
 // ELEMENTS
 /////////////////////////////
 body{
-  background-color: @cell-color;
-  .font-face;
+  background-color: @white;
+  .font-arial;
 }
 
 h1 {
-  color: @red-color;
-  .bold-font;
+  .font-kanit;
   text-align: center;
 
   margin-top: 5em;
 
-
-
-  &:hover span {
-    color: rgb(50, 50, 58);
-  }
 }
 
 .container{
@@ -41,11 +39,8 @@ h1 {
 /////////////////////////////
 // FONTS
 /////////////////////////////
-@font-face {
-  font-family: Arial;
-}
 
-.font-face {
+.font-arial {
   font-family: Arial;
   font-weight: 500;
   font-style: normal;
@@ -53,4 +48,47 @@ h1 {
 
 .bold-font{
   font-weight: 800;
+}
+
+.font-kanit {
+  font-family: 'Kanit', sans-serif;
+}
+
+/////////////////////////////
+// CUSTOM WEEKLI
+/////////////////////////////
+.wk-custom{
+  @wk-header-color:         @dark-purple;
+  @wk-header-color-hover:   #4f224c;
+  @wk-unavailable-color:    @light-purple;
+  @wk-available-color:      @dark-purple;
+  @wk-mobile-header-color:  #383838;
+  @wk-border-color:         #222220;
+  @wk-header-font-color:    white;
+  @wk-mobile-header-font-color: #FFFFFF;
+
+  table.weekli{
+    .wk-cell {
+      background-color: @wk-unavailable-color;
+    }
+
+    .wk-cell.available{
+      background-color: @wk-available-color;
+    }
+  }
+
+  table.weekli_desktop {
+    .wk-header{
+      background-color: @wk-header-color;
+      color: @wk-header-font-color;
+      padding: 10px;
+    }
+
+    .wk-header:hover{
+      background-color: @wk-header-color-hover;
+    }
+
+  }
+
+
 }

@@ -426,7 +426,7 @@
         var day_long  = '';
 
         //ADD blank cell column (empty one in top left)
-        th.className = 'wk-day';
+        th.className = 'wk-day wk-empty';
         thead.appendChild(th);
 
         //ADD day columns
@@ -464,15 +464,17 @@
         var tr;
         var day_attr;
         var hour_attr;
+
         //ADD hour rows to tbody
         for(var k = 0; k < weekli_hours.length - 1; k++){
             //CREATE the hour attribute using the current time and next time
-            hour_attr = weekli_hours[k] + '-' + weekli_hours[k+1];
+            hour_attr = weekli_hours[k].time + ' ' + weekli_hours[k].am_pm + ' -' + weekli_hours[k+1].time + ' ' + weekli_hours[k+1].am_pm;
             //start time row cell
             td = document.createElement('td');
             tr = document.createElement('tr');
             td.setAttribute('data-wk-time-row', hour_attr);
-            td.innerHTML = weekli_hours[k] + '-' + weekli_hours[k+1];
+
+            td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span> - <span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
             td.className = 'wk-time wk-header';
             tr.appendChild(td);
             //end time row cell
@@ -537,12 +539,13 @@
             //ADD hour rows
             for (var k = 0; k < weekli_hours.length - 1; k++) {
                 //CREATE the hour attribute using the current time and next time
-                hour_attr = weekli_hours[k] + '-' + weekli_hours[k+1];
+                hour_attr = weekli_hours[k].time + ' ' + weekli_hours[k].am_pm + ' -' + weekli_hours[k+1].time + ' ' + weekli_hours[k+1].am_pm;
+
                 //start time cell
                 tr = document.createElement('tr');
                 td = document.createElement('td');
                 td.className = 'wk-time wk-header';
-                td.innerHTML = hour_attr;
+                td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span> - <span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
                 //end time cell
 
                 //attach time cell to row
@@ -608,13 +611,30 @@
 
         //CALCULATE and push times into weekli_hours array
         var start_stop   = time_range.split(',');
-        var start_time   = parseFloat(start_stop[0]);
-        var stop_time    = parseFloat(start_stop[1]);
+        var start_       = start_stop[0].split(':');
+        var stop_        = start_stop[1].split(':');
+
+
+        if(start_.length < 2){
+            start_.push("0");
+        }
+        if(stop_.length < 2){
+            stop_.push("0");
+        }
+
+        var start_hour   = parseFloat(start_[0]);
+        var start_min    = parseFloat(start_[1]);
+        var stop_hour    = parseFloat(stop_[0]);
+        var stop_min     = parseFloat(stop_[1]);
+        var start_time   = start_hour + start_min / 100;
+        var stop_time    = stop_hour + stop_min / 100;
+
         var current_time = start_time;
         var current_hour    = Math.floor(current_time);
-        var current_minute  = Math.floor((current_time % 1) * 100);
+        var current_minute  = Math.ceil((Math.round(current_time % 1 * 1000) / 1000) * 100);
         var print_hour;
         var print_minute;
+        var am_pm;
 
         //KEEP adding times into array and incrementing by intervals
         while(current_time < stop_time){
@@ -626,15 +646,25 @@
                 print_minute = current_minute;
             }
 
+            if(current_hour < 12){
+                am_pm = 'am';
+            } else {
+                am_pm = 'pm';
+            }
+
             //IF 12 hour format, put hours in that format
             if(time_format === '12hour' && current_hour > 12){
                 print_hour = current_hour - 12;
-            } else{
+            }
+            else if(time_format === '12hour' && current_hour === 0){
+                print_hour = '12';
+            }
+            else{
                 print_hour = current_hour;
             }
 
             //PUSH the pretty print version of the calculated time
-            weekli_hours.push(print_hour + ':' + print_minute);
+            weekli_hours.push({ time: print_hour + ':' + print_minute, am_pm: am_pm});
 
             //ADD the minutes interval
             current_minute += minutes_interval;
@@ -657,19 +687,30 @@
 
         //ADD the stop time to the end of the array
             current_minute = Math.ceil((stop_time % 1) * 100);
+
             if(current_minute < 10){
                 print_minute = '0' + current_minute;
             } else{
                 print_minute = current_minute;
             }
 
+            if(current_hour < 12){
+                am_pm = 'am';
+            } else {
+                am_pm = 'pm';
+            }
+
             current_hour = Math.floor(stop_time);
             if(time_format === '12hour' && current_hour > 12){
                 print_hour = current_hour - 12;
-            } else{
+            }
+            else if(time_format === '12hour' && current_hour === 0) {
+                print_hour = '12';
+            }
+            else {
                 print_hour = current_hour;
             }
-            weekli_hours.push(print_hour + ':' + print_minute);
+            weekli_hours.push({time: print_hour + ':' + print_minute, am_pm: am_pm});
         //end add stop time
 
         return weekli_hours;

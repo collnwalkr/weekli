@@ -1,8 +1,9 @@
+@import "fonts.css";
 table.weekli {
-  background-color: #222220;
   width: 100%;
   table-layout: fixed;
   text-align: left;
+  font-size: 16px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -16,83 +17,119 @@ table.weekli .wk-cell {
 table.weekli .wk-cell.available {
   background-color: #79BD8F;
 }
+table.weekli .wk-time-span {
+  white-space: nowrap;
+}
+table.weekli .wk-ampm {
+  display: none;
+}
+table.weekli tr {
+  height: 3em;
+}
 table.weekli.weekli_editable .wk-cell:hover {
   cursor: pointer;
-}
-@media only screen and (max-width: 599px) {
-  table.weekli_desktop {
-    display: none;
-  }
-}
-@media only screen and (min-width: 600px) and (max-width: 649px), only screen and (min-width: 650px) and (max-width: 849px), only screen and (min-width: 850px) {
-  table.weekli_desktop {
-    display: table;
-  }
-  table.weekli_desktop .wk-day-abbrv {
-    display: none;
-  }
-  table.weekli_desktop .wk-day-long {
-    display: inline-block;
-  }
-}
-@media only screen and (min-width: 650px) and (max-width: 849px) {
-  table.weekli_desktop .wk-day {
-    font-size: 0.75em;
-  }
-}
-@media only screen and (min-width: 600px) and (max-width: 649px) {
-  table.weekli_desktop .wk-day-abbrv {
-    display: inline-block;
-  }
-  table.weekli_desktop .wk-day-long {
-    display: none;
-  }
-}
-table.weekli_desktop th.wk-day,
-table.weekli_desktop td.wk-time {
-  background-color: #f9f9f9;
-  padding: 10px;
 }
 table.weekli_desktop.weekli_editable:hover {
   cursor: pointer;
 }
 @media only screen and (max-width: 599px) {
+  table.weekli_desktop {
+    display: none;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 674px), only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  table.weekli_desktop {
+    display: table;
+  }
+}
+@media only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  table.weekli_desktop .wk-day-abbrv {
+    display: none;
+  }
+  table.weekli_desktop .wk-day-long {
+    display: inline-block;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 674px) {
+  table.weekli_desktop .wk-day-abbrv {
+    display: inline-block;
+  }
+  table.weekli_desktop .wk-day-long {
+    display: none;
+  }
+  table.weekli_desktop .wk-day {
+    font-size: 1em;
+  }
+  table.weekli_desktop td.wk-time {
+    font-size: 0.75em;
+  }
+}
+@media only screen and (min-width: 675px) and (max-width: 884px) {
+  table.weekli_desktop .wk-day {
+    font-size: 0.75em;
+  }
+  table.weekli_desktop td.wk-time {
+    font-size: 0.75em;
+  }
+}
+@media only screen and (min-width: 885px) {
+  table.weekli_desktop .wk-day {
+    font-size: 1em;
+  }
+  table.weekli_desktop td.wk-time {
+    font-size: 1em;
+  }
+}
+table.weekli_desktop .wk-header {
+  background-color: #f9f9f9;
+  color: #222220;
+  padding: 10px;
+}
+table.weekli_desktop .wk-header:hover {
+  background-color: #e7e7e7;
+}
+table.weekli_desktop .wk-empty {
+  border: 0 !important;
+  cursor: default;
+}
+@media only screen and (max-width: 599px) {
   table.weekli_mobile {
     display: table;
   }
 }
-@media only screen and (min-width: 600px) and (max-width: 649px), only screen and (min-width: 650px) and (max-width: 849px), only screen and (min-width: 850px) {
+@media only screen and (min-width: 600px) and (max-width: 674px), only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
   table.weekli_mobile {
     display: none;
   }
 }
-table.weekli_mobile th.wk-day,
-table.weekli_mobile td.wk-time {
+table.weekli_mobile .wk-header {
   background-color: #f9f9f9;
   padding: 10px;
 }
-table.weekli_mobile th.wk-day {
+table.weekli_mobile th.wk-header {
   background-color: #383838;
-  color: white;
+  color: #FFFFFF;
   text-align: right;
+}
+table.weekli_mobile td.wk-time {
+  font-size: 1em;
+}
+table.weekli_mobile th.wk-day {
+  font-size: 1em;
 }
 table.weekli_mobile.weekli_editable th.wk-day:hover {
   cursor: pointer;
 }
 body {
-  background-color: #f9f9f9;
+  background-color: #FFFFFF;
   font-family: Arial;
   font-weight: 500;
   font-style: normal;
 }
 h1 {
-  color: #FF6138;
-  font-weight: 800;
+  font-family: 'Kanit', sans-serif;
   text-align: center;
   margin-top: 5em;
-}
-h1:hover span {
-  color: #32323a;
 }
 .container {
   max-width: 900px;
@@ -100,14 +137,28 @@ h1:hover span {
   margin-left: auto;
   margin-right: auto;
 }
-@font-face {
-  font-family: Arial;
-}
-.font-face {
+.font-arial {
   font-family: Arial;
   font-weight: 500;
   font-style: normal;
 }
 .bold-font {
   font-weight: 800;
+}
+.font-kanit {
+  font-family: 'Kanit', sans-serif;
+}
+.wk-custom table.weekli .wk-cell {
+  background-color: #B86CAC;
+}
+.wk-custom table.weekli .wk-cell.available {
+  background-color: #6e2c6b;
+}
+.wk-custom table.weekli_desktop .wk-header {
+  background-color: #6e2c6b;
+  color: white;
+  padding: 10px;
+}
+.wk-custom table.weekli_desktop .wk-header:hover {
+  background-color: #4f224c;
 }
