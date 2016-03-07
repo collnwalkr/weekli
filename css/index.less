@@ -9,26 +9,77 @@
 /////////////////////////////
 // VARIABLES
 /////////////////////////////
-@light-purple: #B86CAC;
-@dark-purple: #6e2c6b;
+@light-color: #79BD8F;
+@dark-color: #3D303A;
 @white: #FFFFFF;
 
 /////////////////////////////
 // ELEMENTS
 /////////////////////////////
+
+// Main Elements
 body{
   background-color: @white;
   .font-arial;
+  margin: 0;
 }
 
 h1 {
   .font-kanit;
-  text-align: center;
+}
 
-  margin-top: 5em;
+.big-block{
+  padding: 90px 0;
+  width: 100%;
+}
+
+// Header
+.block-light{
+  background-color: @light-color;
+
+  .wk-logo{
+    background-image: url('../assets/logo.svg');
+    background-repeat: no-repeat;
+    width: 170px;
+    height: 170px;
+    margin: 0 auto;
+  }
+}
+
+// Nav
+.nav-bar{
+
+  background-color: @dark-color;
+
+
+  ul{
+    margin: 0 auto;
+    max-width: 950px;
+    display: flex;
+    list-style:none;
+    padding: 1em;
+
+    li{
+      display:block;
+      float:left;
+      margin: 0 25px;
+      color: white;
+      max-width: 100px;
+      line-height: 30px;
+    }
+
+    .nav-logo{
+      background-image: url('../assets/logo-nav-bar.svg');
+      background-repeat: no-repeat;
+      width: 30px;
+      height: 30px;
+    }
+
+  }
 
 }
 
+// Weekli's
 .container{
   max-width: 900px;
   display: block;
@@ -36,10 +87,10 @@ h1 {
   margin-right: auto;
 
 }
+
 /////////////////////////////
 // FONTS
 /////////////////////////////
-
 .font-arial {
   font-family: Arial;
   font-weight: 500;
@@ -58,10 +109,10 @@ h1 {
 // CUSTOM WEEKLI
 /////////////////////////////
 .wk-custom{
-  @wk-header-color:         @dark-purple;
+  @wk-header-color:         @dark-color;
   @wk-header-color-hover:   #4f224c;
-  @wk-unavailable-color:    @light-purple;
-  @wk-available-color:      @dark-purple;
+  @wk-unavailable-color:    @light-color;
+  @wk-available-color:      @dark-color;
   @wk-mobile-header-color:  #383838;
   @wk-border-color:         #222220;
   @wk-header-font-color:    white;

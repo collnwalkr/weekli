@@ -12,7 +12,7 @@ table.weekli {
   user-select: none;
 }
 table.weekli .wk-cell {
-  background-color: #FF6138;
+  background-color: #f26d5b;
 }
 table.weekli .wk-cell.available {
   background-color: #79BD8F;
@@ -125,11 +125,48 @@ body {
   font-family: Arial;
   font-weight: 500;
   font-style: normal;
+  margin: 0;
 }
 h1 {
   font-family: 'Kanit', sans-serif;
-  text-align: center;
-  margin-top: 5em;
+}
+.big-block {
+  padding: 90px 0;
+  width: 100%;
+}
+.block-light {
+  background-color: #79BD8F;
+}
+.block-light .wk-logo {
+  background-image: url('../assets/logo.svg');
+  background-repeat: no-repeat;
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+}
+.nav-bar {
+  background-color: #3D303A;
+}
+.nav-bar ul {
+  margin: 0 auto;
+  max-width: 950px;
+  display: flex;
+  list-style: none;
+  padding: 1em;
+}
+.nav-bar ul li {
+  display: block;
+  float: left;
+  margin: 0 25px;
+  color: white;
+  max-width: 100px;
+  line-height: 30px;
+}
+.nav-bar ul .nav-logo {
+  background-image: url('../assets/logo-nav-bar.svg');
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
 }
 .container {
   max-width: 900px;
@@ -149,13 +186,13 @@ h1 {
   font-family: 'Kanit', sans-serif;
 }
 .wk-custom table.weekli .wk-cell {
-  background-color: #B86CAC;
+  background-color: #79BD8F;
 }
 .wk-custom table.weekli .wk-cell.available {
-  background-color: #6e2c6b;
+  background-color: #3D303A;
 }
 .wk-custom table.weekli_desktop .wk-header {
-  background-color: #6e2c6b;
+  background-color: #3D303A;
   color: white;
   padding: 10px;
 }
