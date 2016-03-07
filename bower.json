@@ -1,0 +1,40 @@
+{
+  "name": "weekli.js",
+  "version": "0.1.5",
+  "description": "The easiest way for your users to input their availability on a week calendar.",
+  "main": [
+    "css/weekli.less",
+    "css/weekli.css",
+    "js/weekli.js",
+    "js/weekli.min.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/collnwalkr/weekli.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "ui",
+    "calender",
+    "widget",
+    "agenda",
+    "week",
+    "time"
+  ],
+  "authors": [
+    "Collin Walker"
+  ],
+  "ignore": [
+    ".gitignore",
+    "Gruntfile.js",
+    "*.md",
+    "*.json",
+    ".jshintignore",
+    "node_modules"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "homepage": "http://collnwalkr.github.io/weekli/",
+  "moduleType": []
+}
