@@ -2,7 +2,7 @@
 ---
 **Version 0.1.5**
 
-[weekli.js](collnwalkr.github.io/weekli/) is the easiest way for your users to input their availability on a week calendar effortlessly.
+[weekli.js](http://collnwalkr.github.io/weekli/) is the easiest way for your users to input their availability on a week calendar effortlessly.
 
 #### Get your hands on it
 [Bower](http://bower.io) install
