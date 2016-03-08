@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
+
         //LINT javascript files
         jshint: {
             files: ['Gruntfile.js', 'js/*.js'],
@@ -34,7 +35,8 @@ module.exports = function(grunt) {
                 },
                 files: {
                     //compilation.css  :  source.less
-                    "css/weekli.css": "css/weekli.less"
+                    "css/weekli.css": "css/weekli.less",
+                    "css/index.css": "css/index.less"
                 }
             }
         },
@@ -49,8 +51,8 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: ['js/*.js', 'css/*.less'],
-            tasks: ['jshint', 'less']
+            files: ['js/*.js', 'js/*.js', 'css/*.less'],
+            tasks: ['jshint', 'uglify', 'less']
         }
     });
 
