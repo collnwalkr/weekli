@@ -302,18 +302,30 @@
         for (var k = 0; k < time_row.length; k++) {
             time_row[k].addEventListener('mousedown',time_row_mousedown, false);
             time_row[k].wk_id = wk_id;
+
+            //ADD event listener to span children
+            for(var o = 0; o < time_row[k].childNodes.length; o++){
+                time_row[k].childNodes[o].removeEventListener('mousedown',time_row_mousedown, false);
+                time_row[k].childNodes[o].wk_id = wk_id;
+                //ADD event listener to span grandchildren
+
+                for(var p = 0; p < time_row[k].childNodes[o].childNodes.length; p++){
+                    time_row[k].childNodes[o].childNodes[p].removeEventListener('mousedown',time_row_mousedown, false);
+                    time_row[k].childNodes[o].childNodes[p].wk_id = wk_id;
+                }
+            }
         }
 
         //ADD event listener to time column to toggle row on click
         for (var l = 0; l < day_column.length; l++) {
             day_column[l].addEventListener('mousedown',day_column_mousedown, false);
+            day_column[l].wk_id = wk_id;
 
             //ADD event listener to span children
             for(var m = 0; m < day_column[l].childNodes.length; m++){
                 day_column[l].childNodes[m].addEventListener('mousedown',day_column_mousedown, false);
                 day_column[l].childNodes[m].wk_id = wk_id;
             }
-            day_column[l].wk_id = wk_id;
         }
 
         //GIVE weekli divs editable class
@@ -354,18 +366,29 @@
         for (var k = 0; k < time_row.length; k++) {
             time_row[k].removeEventListener('mousedown',time_row_mousedown, false);
             time_row[k].wk_id = wk_id;
+
+            //REMOVE event listener to span children
+            for(var o = 0; o < time_row[k].childNodes.length; o++){
+                time_row[k].childNodes[o].removeEventListener('mousedown',time_row_mousedown, false);
+                time_row[k].childNodes[o].wk_id = wk_id;
+                //REMOVE event listener to span grandchildren
+                for(var p = 0; p < time_row[k].childNodes[o].childNodes.length; p++){
+                    time_row[k].childNodes[o].childNodes[p].removeEventListener('mousedown',time_row_mousedown, false);
+                    time_row[k].childNodes[o].childNodes[p].wk_id = wk_id;
+                }
+            }
         }
 
         //REMOVE event listener to time column to toggle row on click
         for (var l = 0; l < day_column.length; l++) {
             day_column[l].removeEventListener('mousedown',day_column_mousedown, false);
+            day_column[l].wk_id = wk_id;
 
             //ADD event listener to span children
             for(var m = 0; m < day_column[l].childNodes.length; m++){
                 day_column[l].childNodes[m].removeEventListener('mousedown',day_column_mousedown, false);
                 day_column[l].childNodes[m].wk_id = wk_id;
             }
-            day_column[l].wk_id = wk_id;
         }
 
         //GIVE weekli divs uneditable class

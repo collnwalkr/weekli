@@ -20,9 +20,6 @@ table.weekli .wk-cell.available {
 table.weekli .wk-time-span {
   white-space: nowrap;
 }
-table.weekli .wk-ampm {
-  display: none;
-}
 table.weekli tr {
   height: 3em;
 }
