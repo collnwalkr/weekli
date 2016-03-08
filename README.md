@@ -1,5 +1,5 @@
 # weekli.js
----
+
 **Version 0.1.5**
 
 [weekli.js](http://collnwalkr.github.io/weekli/) is the easiest way for your users to input their availability on a week calendar effortlessly.
@@ -13,5 +13,3 @@ bower install weekli.js --save
 ```bash
 git clone https://github.com/collnwalkr/weekli.git
 ```
-
-I just want a ZIP [download](https://github.com/collnwalkr/weekli/releases/download/0.1.5/weekli_js.zip)

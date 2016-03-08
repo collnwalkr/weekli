@@ -1,6 +1,6 @@
 {
   "name": "weekli.js",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "The easiest way for your users to input their availability on a week calendar.",
   "main": [
     "css/weekli.less",
@@ -26,12 +26,11 @@
     "Collin Walker"
   ],
   "ignore": [
-    ".gitignore",
-    "Gruntfile.js",
-    "*.md",
-    "*.json",
-    ".jshintignore",
-    "node_modules"
+    "*",
+    "!css/",
+    "!css/*",
+    "!js/",
+    "!js/*"
   ],
   "dependencies": {},
   "devDependencies": {},

@@ -35,8 +35,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     //compilation.css  :  source.less
-                    "css/weekli.css": "css/weekli.less",
-                    "css/index.css": "css/index.less"
+                    "css/weekli.css": "css/weekli.less"
                 }
             }
         },
@@ -53,6 +52,14 @@ module.exports = function(grunt) {
         watch: {
             files: ['js/*.js', 'js/*.js', 'css/*.less'],
             tasks: ['jshint', 'uglify', 'less']
+        },
+
+        bump: {
+            options: {
+                files: ['package.json', 'bower.json'],
+                commit: false,
+                push: false
+            }
         }
     });
 
@@ -61,7 +68,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-connect');
-
+    grunt.loadNpmTasks('grunt-bump');
 
     grunt.registerTask('default', ['jshint', 'uglify', 'less','connect', 'watch']);
 };
