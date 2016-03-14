@@ -1,0 +1,6 @@
+#only npm publish the correct files
+*
+!css/
+!css/*
+!js/
+!js/*
