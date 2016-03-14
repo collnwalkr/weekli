@@ -13,6 +13,7 @@
         var defaults = {
             wk_id: 'weekli',
             week: 'week',
+            week_days: [],
             minute_interval: '60',
             time_range: '7,17',
             editable: true,

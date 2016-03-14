@@ -11,7 +11,7 @@ table.weekli {
   user-select: none;
 }
 table.weekli .wk-cell {
-  background-color: #FF6138;
+  background-color: #f26d5b;
 }
 table.weekli .wk-cell.available {
   background-color: #79BD8F;
