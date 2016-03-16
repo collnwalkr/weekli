@@ -20,6 +20,9 @@ table.weekli .wk-cell.available {
 table.weekli .wk-time-span {
   white-space: nowrap;
 }
+table.weekli .wk-ampm {
+  display: none;
+}
 table.weekli tr {
   height: 3em;
 }
@@ -131,10 +134,10 @@ h1 {
   padding: 90px 0;
   width: 100%;
 }
-.block-light {
+header.block-light {
   background-color: #79BD8F;
 }
-.block-light .wk-logo {
+header.block-light .wk-logo {
   background-image: url('../assets/logo.svg');
   background-repeat: no-repeat;
   width: 170px;
@@ -159,11 +162,13 @@ h1 {
   max-width: 100px;
   line-height: 30px;
 }
-.nav-bar ul .nav-logo {
+.nav-bar ul li.nav-logo {
   background-image: url('../assets/logo-nav-bar.svg');
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
+  position: relative;
+  left: 10px;
 }
 .container {
   max-width: 900px;

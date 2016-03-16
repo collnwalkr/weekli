@@ -10,10 +10,9 @@
 // VARIABLES
 /////////////////////////////
 @light-color: #79BD8F;
+@dark-accent: #1E6B37;
 @dark-color: #3D303A;
 @white: #FFFFFF;
-
-@wk-hide-ampm:            false;
 
 
 /////////////////////////////
@@ -37,10 +36,10 @@ h1 {
 }
 
 // Header
-.block-light{
+header.block-light{
   background-color: @light-color;
 
-  .wk-logo{
+  .wk-logo {
     background-image: url('../assets/logo.svg');
     background-repeat: no-repeat;
     width: 170px;
@@ -48,6 +47,7 @@ h1 {
     margin: 0 auto;
   }
 }
+
 
 // Nav
 .nav-bar{
@@ -71,11 +71,13 @@ h1 {
       line-height: 30px;
     }
 
-    .nav-logo{
+    li.nav-logo{
       background-image: url('../assets/logo-nav-bar.svg');
       background-repeat: no-repeat;
       width: 30px;
       height: 30px;
+      position: relative;
+      left: 10px;
     }
 
   }
