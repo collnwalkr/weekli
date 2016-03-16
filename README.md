@@ -33,7 +33,7 @@ git clone https://github.com/collnwalkr/weekli.git
 ```
 ---
 ### Usage
-#### Default Usage:
+#### Basic Usage:
 ```html
 <!--
     A weekli component needs an empty div tag with an id.
@@ -69,8 +69,9 @@ var weekli_output = weekli.get_output();
 }
 ```
 #### Custom Usage:
+A weekli object can be instantiated with custom properties.
 ```javascript
-// all customization properties in their default state
+// all customization properties and their default value
 var weekli = new Weekli({
     wk_id: 'weekli',
     week: 'week',
@@ -88,9 +89,26 @@ var weekli = new Weekli({
 | **week_days:** | if week is `custom`, days of the week will be pulled from this array of strings (ex: `week_days: ['Sunday', 'Tuesday', 'Friday']`) |
 | **minute_interval:** | `int` determines the time-span for each row (ex: `minute_interval: 60` = 7:00 - 8:00 , `minute_interval: 75` = 7:00 - 8:15) |  
 |**time_range:** | `int,int` specifies the start and end times for the rows (ex: `time_range: 10:15,15:30` = 10:15 am - 3:30 pm) |  
-| **editable:** | `true` or `false` determins if weekli component can be edited by user interaction |
+| **editable:** | `true` or `false` determines if weekli component can be edited by user interaction |
 | **time_format:** | `12hour` or `24hour` specifies if time should be shown in civilian or military format |
+In addition, weekli objects have several public functions. 
+```javascript
+    weekli.make_uneditable();
+    // weekli will now ignore all user input
 
+    weekli.make_editable();
+    // weekli will react to user input
+
+    weekli.load_data(JSON);
+    // clear the calendar, then load in the JSON object
+    // and display the available times
+    
+    weekli.all_available();
+    // make all times available
+    
+    weekli.all_unavailable();
+    // make all times unavailable
+```
 #### Custom Styling:
 Weekli is styled with [less](http://lesscss.org/). All of the basic coloring, font sizes, and window-size breakpoints can be found in the `weekli.less` file. **However**, there are some conditionals in the less file that are noteworthy:
 
