@@ -9,16 +9,22 @@
 /////////////////////////////
 // VARIABLES
 /////////////////////////////
-@light-color: #79BD8F;
+@light-color: #79bd8f;
 @dark-accent: #1E6B37;
-@dark-color: #3D303A;
+@dark-color: #312d30;
 @white: #FFFFFF;
+
+// BREAKPOINTS
+// Source: http://blog.scur.pl/2012/06/variable-media-queries-less-css/
+@mobile:      ~"only screen and (max-width: 599px)";
+@tablet:      ~"only screen and (min-width: 600px) and (max-width: 674px)";
+@desktop:     ~"only screen and (min-width: 675px) and (max-width: 884px)";
+@desktop-xl:  ~"only screen and (min-width: 885px)";
 
 
 /////////////////////////////
 // ELEMENTS
 /////////////////////////////
-
 // Main Elements
 body{
   background-color: @white;
@@ -31,14 +37,19 @@ h1 {
 }
 
 .big-block{
-  padding: 90px 0;
+  padding: 60px 0;
   width: 100%;
+}
+
+.dark-block{
+  background-color: @dark-color;
+  color: white;
+
 }
 
 // Header
 header.block-light{
   background-color: @light-color;
-
   .wk-logo {
     background-image: url('../assets/logo.svg');
     background-repeat: no-repeat;
@@ -46,40 +57,35 @@ header.block-light{
     height: 170px;
     margin: 0 auto;
   }
+  p{
+    text-align: center;
+    color: #255c37;
+    font-size: 1.1em;
+  }
 }
 
+button{
+  background-color: @light-color;
+  height: 50px;
+  max-width: 100%;
+  min-width: 220px;
+  padding: 0 25px;
+  margin: 10px;
+  border: 0;
+  border-radius: 2px;
+  font-size: 0.9em;
+  color: white;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.1s;
+  box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.16);
+  cursor: pointer;
 
-// Nav
-.nav-bar{
+  span{
+    color: #255c37;
+  }
 
-  background-color: @dark-color;
-
-
-  ul{
-    margin: 0 auto;
-    max-width: 950px;
-    display: flex;
-    list-style:none;
-    padding: 1em;
-
-    li{
-      display:block;
-      float:left;
-      margin: 0 25px;
-      color: white;
-      max-width: 100px;
-      line-height: 30px;
-    }
-
-    li.nav-logo{
-      background-image: url('../assets/logo-nav-bar.svg');
-      background-repeat: no-repeat;
-      width: 30px;
-      height: 30px;
-      position: relative;
-      left: 10px;
-    }
-
+  &:hover{
+    box-shadow: inset 0 -50px 0 0 rgba(0, 0, 0, 0.16);
   }
 
 }
@@ -90,7 +96,22 @@ header.block-light{
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
 
+@media @desktop, @desktop-xl{
+  h1,h2,h3,p {
+    padding: 0;
+  }
+}
+
+@media @mobile, @tablet{
+  h1, h2, h3, p {
+    padding: 0 10px;
+  }
+  code[class*="language-"],
+  pre[class*="language-"] {
+    font-size: .85em;
+  }
 }
 
 /////////////////////////////
@@ -109,6 +130,7 @@ header.block-light{
 .font-kanit {
   font-family: 'Kanit', sans-serif;
 }
+
 
 /////////////////////////////
 // CUSTOM WEEKLI

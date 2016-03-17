@@ -52,7 +52,7 @@ weekli.build();
 ```javascript
 // get the JSON output
 var weekli_output = weekli.get_output();
-//example output
+// example output
 {
   "available": [
         {

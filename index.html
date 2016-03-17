@@ -6,6 +6,7 @@
     <title>weekli</title>
     <link rel="stylesheet" type="text/css" href="css/weekli.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/prism.css"/>
     <!--[if lt IE 9]>
         <script src="node_modules/html5shiv/dist/html5shiv.js"></script>
     <![endif]-->
@@ -14,30 +15,79 @@
 
     <header class="big-block block-light">
         <div class="wk-logo"></div>
+        <p>input week availability effortlessly</p>
     </header>
 
 
-    <main class="big-block wk-explanation">
-        <div class="container">
-            <div id="id"></div>
+    <main class="">
+
+        <!-- WEEKLI DEMO -->
+        <div class="big-block container">
+
+            <h2>Let's Get Started</h2>
+            <pre>
+                <code class="language-html">
+&lt;!-- in our HTML we'll make a new div where weekli will live -->
+&lt;div id="weekli">&lt;/div>
+                </code>
+                <code class="language-javascript">
+// now in our JS, we'll create a new weekli object and build it with the default options
+var weekli = new Weekli():
+weekli.build();
+                </code>
+            </pre>
+
+            <div class="big-block">
+                <div id="weekli"></div>
+            </div>
+
+            <div class="button-group">
+                <button onclick="weekli.make_uneditable()">     <span>weekli.</span>make_uneditable( )</button>
+                <button onclick="weekli.make_editable()">       <span>weekli.</span>make_editable( )</button>
+                <button onclick="load_data()">                  <span>weekli.</span>load_data(JSON)</button>
+                <button onclick="weekli.all_available()">       <span>weekli.</span>all_available( )</button>
+                <button onclick="weekli.all_unavailable()">     <span>weekli.</span>all_unavailable( )</button>
+            </div>
         </div>
+        <!-- /END WEEKLI DEMO -->
+
+        <!-- INSTALL INSTRUCTIONS -->
+        <div class="big-block dark-block">
+            <div class="container">
+                <h2>Get Your Hands On It</h2>
+                <p>BOWER</p>
+                <pre>
+                    <code class="language-bash">
+bower install weekli.js --save
+                    </code>
+                    <code class="language-html">
+&lt;link rel="stylesheet" type="text/css" href="bower_components/weekli.js/css/weekli.css">
+&lt;script type="text/javascript" src="bower_components/weekli.js/js/weekli.min.js">&lt;/script>
+                    </code>
+                </pre>
+
+                <p>NPM</p>
+                <pre>
+                    <code class="language-bash">
+npm install weekli.js --save
+                    </code>
+                    <code class="language-html">
+&lt;link rel="stylesheet" type="text/css" href="node_modules/weekli.js/css/weekli.css">
+&lt;script type="text/javascript" src="node_modules/weekli.js/js/weekli.min.js">&lt;/script>
+                    </code>
+                </pre>
+            </div>
+        </div>
+        <!-- /END INSTALL INSTRUCTIONS -->
+
     </main>
 
     <br/>
-
-
-
-    <button onclick="weekli_id.make_uneditable()">make uneditable</button>
-    <button onclick="weekli_id.make_editable()">make editable</button>
-    <button onclick="load_data()">load data</button>
-    <br/>
-    <button onclick="weekli_id.all_available()">all available</button>
-    <button onclick="weekli_id.all_unavailable()">all unavailable</button>
-
 
 </body>
 
 <script  type="text/javascript" src="js/weekli.min.js"></script>
 <script  type="text/javascript" src="js/index.js"></script>
+<script  type="text/javascript" src="js/prism.js"></script>
 
 </html>
