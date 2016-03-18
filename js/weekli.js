@@ -710,7 +710,7 @@
 
 
         //ADD the stop time to the end of the array
-        current_minute = Math.ceil((stop_time % 1) * 100);
+        current_minute  = Math.ceil((Math.round(stop_time % 1 * 1000) / 1000) * 100);
 
         if(current_minute < 10){
             print_minute = '0' + current_minute;

@@ -2,7 +2,7 @@
 
 **a pure javascript component that allows your users to effortlessly input their availability on a week calendar**
 
-Version 0.2.8
+Version 0.2.9
 
 [Demo and Examples](http://collnwalkr.github.io/weekli/) *in progress*
 ![weekli capture](https://cloud.githubusercontent.com/assets/7200683/13758674/cf55750c-e9e7-11e5-8bca-65265480f023.gif)

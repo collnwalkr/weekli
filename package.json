@@ -21,6 +21,15 @@
     "type": "git",
     "url": "git+https://github.com/collnwalkr/weekli.git"
   },
+  "keywords": [
+    "javascript",
+    "ui",
+    "calender",
+    "widget",
+    "agenda",
+    "week",
+    "time"
+  ],
   "author": "Collin Walker",
   "license": "ISC",
   "homepage": "https://github.com/collnwalkr/weekli#readme"
