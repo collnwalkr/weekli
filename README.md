@@ -2,7 +2,7 @@
 
 **a pure javascript component that allows your users to effortlessly input their availability on a week calendar**
 
-Version 0.2.7
+Version 0.2.8
 
 [Demo and Examples](http://collnwalkr.github.io/weekli/) *in progress*
 ![weekli capture](https://cloud.githubusercontent.com/assets/7200683/13758674/cf55750c-e9e7-11e5-8bca-65265480f023.gif)
@@ -57,13 +57,13 @@ var weekli_output = weekli.get_output();
   "available": [
         {
           "day": "WED",
-          "time": "7:00 am -8:00 am"
+          "time": "7:00 am-8:00 am"
         }
     ],
   "unavailable": [
         {
           "day": "WED",
-          "time": "8:00 am -9:00 am"
+          "time": "8:00 am-9:00 am"
         }
     ]
 }
