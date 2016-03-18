@@ -12,10 +12,10 @@
         // Option defaults
         var defaults = {
             wk_id: 'weekli',
-            week: 'week',
+            week: 'workweek',
             week_days: [],
-            minute_interval: '60',
-            time_range: '7,17',
+            minute_interval: 60,
+            time_range: '7,12',
             editable: true,
             time_format: '12hour'
         };
