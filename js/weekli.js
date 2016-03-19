@@ -498,7 +498,7 @@
             tr = document.createElement('tr');
             td.setAttribute('data-wk-time-row', hour_attr);
 
-            td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span>-<span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
+            td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span> - <span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
             td.className = 'wk-time wk-header';
             tr.appendChild(td);
             //end time row cell
@@ -569,7 +569,7 @@
                 tr = document.createElement('tr');
                 td = document.createElement('td');
                 td.className = 'wk-time wk-header';
-                td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span>-<span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
+                td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span></span>- <span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
                 //end time cell
 
                 //attach time cell to row
