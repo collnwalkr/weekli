@@ -1,6 +1,6 @@
 {
   "name": "weekli.js",
-  "version": "0.2.10",
+  "version": "1.0.0",
   "description": "Javascript component that enables users to quickly select their availability on a week calendar.",
   "main": "Gruntfile.js",
   "dependencies": {
