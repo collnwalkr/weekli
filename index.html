@@ -52,7 +52,7 @@
 &lt;div id="weekli">&lt;/div>
                     </code>
                     <code class="language-javascript">
-/ now in our JS, we'll create a new weekli object and build it with the default options
+// now in our JS, we'll create a new weekli object and build it with the default options
 var weekli = new Weekli():
 weekli.build();
                     </code>
@@ -67,21 +67,21 @@ weekli.build();
                     <code class="language-javascript">
 var weekli_output = weekli.get_output();
 
-/ example output
+// example output
 {
     "available": [
         {
             "day": "WED",
             "time": "7:00 am-8:00 am"
         },
-        / etc. etc.
+        // etc. etc.
       ],
     "unavailable": [
         {
             "day": "WED",
             "time": "8:00 am-9:00 am"
         },
-        / etc. etc.
+        // etc. etc.
       ]
 }
                     </code>
@@ -99,36 +99,36 @@ var weekli_output = weekli.get_output();
                 <h2>Make It A Custom Fit</h2>
                 <pre>
                     <code class="language-javascript">
-/ Here are all of weekli's customization
-/ properties and their default value
+// Here are all of weekli's customization
+// properties and their default value
 
 var weekli = new Weekli({
     wk_id: 'weekli',
-    / specifies the div id weekli is in
-    / (example if &lt;div id = "weekli_custom">&lt;/div> then wk_id: 'weekli_custom')
+    // specifies the div id weekli is in
+    // (example if &lt;div id = "weekli_custom">&lt;/div> then wk_id: 'weekli_custom')
 
     week: 'workweek',
-    / decides which days of the week to show
-    / (can be 'week', 'workweek', 'weekend', or 'custom')
+    // decides which days of the week to show
+    // (can be 'week', 'workweek', 'weekend', or 'custom')
 
     week_days: [],
-    / if 'week: custom', days of the week will be pulled from this array of strings
-    / (ex: week_days: ['Sunday', 'Tuesday', 'Friday'])
+    // if 'week: custom', days of the week will be pulled from this array of strings
+    // (ex: week_days: ['Sunday', 'Tuesday', 'Friday'])
 
     minute_interval: '60',
-    / determines the time-span for each row
-    / (ex: minute_interval: 75 would lead to rows showing 1hr 15min intervals 7:00 - 8:15)
+    // determines the time-span for each row
+    // (ex: minute_interval: 75 would lead to rows showing 1hr 15min intervals 7:00 - 8:15)
 
     time_range: '7:00,12:00',
-    / specifies the start and end times for the rows in military format
-    / (ex: time_range: 10:15,15:30 would have rows going from 10:15 am - 3:30 pm)
+    // specifies the start and end times for the rows in military format
+    // (ex: time_range: 10:15,15:30 would have rows going from 10:15 am - 3:30 pm)
 
     editable: true,
-    / determines if weekli component can be changed by user interaction
+    // determines if weekli component can be changed by user interaction
 
     time_format: '12hour'
-    / specifies if time should be shown in civilian or military format
-    / can be '12hour' or '24hour'
+    // specifies if time should be shown in civilian or military format
+    // can be '12hour' or '24hour'
 });
 
 weekli.build();
@@ -140,20 +140,20 @@ weekli.build();
                     <pre>
                         <code class="language-javascript">
 weekli.make_uneditable();
-/ weekli will now ignore all user input
+// weekli will now ignore all user input
 
 weekli.make_editable();
-/ weekli will react to user input
+// weekli will react to user input
 
 weekli.load_data(JSON);
-/ clear the calendar, then load in the JSON object
-/ and display the available times
+// clear the calendar, then load in the JSON object
+// and display the available times
 
 weekli.all_available();
-/ make all times available
+// make all times available
 
 weekli.all_unavailable();
-/ make all times unavailable
+// make all times unavailable
                         </code>
                     </pre>
 
