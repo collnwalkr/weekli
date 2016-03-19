@@ -3,10 +3,32 @@
 <meta name="viewport" content="width=device-width" />
 <head>
     <meta charset="UTF-8">
-    <title>weekli</title>
+    <title>weekli.js</title>
     <link rel="stylesheet" type="text/css" href="css/weekli.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/prism.css"/>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/icons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/assets/icons/manifest.json">
+    <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
+    <meta name="theme-color" content="#79bd8f">
+
     <!--[if lt IE 9]>
         <script src="node_modules/html5shiv/dist/html5shiv.js"></script>
     <![endif]-->
@@ -15,78 +37,199 @@
 
     <header class="big-block block-light">
         <div class="wk-logo"></div>
-        <p>input week availability effortlessly</p>
+        <h1>weekli.js</h1>
     </header>
 
 
-    <main class="">
-
+    <main>
         <!-- WEEKLI DEMO -->
-        <div class="big-block container">
-
-            <h2>Let's Get Started</h2>
-            <pre>
-                <code class="language-html">
+        <div class="big-block">
+            <div class="container">
+                <h2>Let's Get Started</h2>
+                <pre>
+                    <code class="language-html">
 &lt;!-- in our HTML we'll make a new div where weekli will live -->
 &lt;div id="weekli">&lt;/div>
-                </code>
-                <code class="language-javascript">
+                    </code>
+                    <code class="language-javascript">
 // now in our JS, we'll create a new weekli object and build it with the default options
 var weekli = new Weekli():
 weekli.build();
-                </code>
-            </pre>
+                    </code>
+                </pre>
 
-            <div class="big-block">
-                <div id="weekli"></div>
+                <div class="big-block">
+                    <div id="weekli"></div>
+                </div>
+
+                <h2>Get The Output</h2>
+                <pre>
+                    <code class="language-javascript">
+var weekli_output = weekli.get_output();
+
+// example output
+{
+    "available": [
+        {
+            "day": "WED",
+            "time": "7:00 am-8:00 am"
+        },
+        // etc. etc.
+      ],
+    "unavailable": [
+        {
+            "day": "WED",
+            "time": "8:00 am-9:00 am"
+        },
+        // etc. etc.
+      ]
+}
+                    </code>
+                </pre>
+
             </div>
 
-            <div class="button-group">
-                <button onclick="weekli.make_uneditable()">     <span>weekli.</span>make_uneditable( )</button>
-                <button onclick="weekli.make_editable()">       <span>weekli.</span>make_editable( )</button>
-                <button onclick="load_data()">                  <span>weekli.</span>load_data(JSON)</button>
-                <button onclick="weekli.all_available()">       <span>weekli.</span>all_available( )</button>
-                <button onclick="weekli.all_unavailable()">     <span>weekli.</span>all_unavailable( )</button>
-            </div>
         </div>
         <!-- /END WEEKLI DEMO -->
 
-        <!-- INSTALL INSTRUCTIONS -->
+
+        <!-- WEEKLI CONFIG -->
         <div class="big-block dark-block">
             <div class="container">
-                <h2>Get Your Hands On It</h2>
-                <p>BOWER</p>
+                <h2>Make It A Custom Fit</h2>
                 <pre>
-                    <code class="language-bash">
-bower install weekli.js --save
+                    <code class="language-javascript">
+// Here are all of weekli's customization
+// properties and their default value
+
+var weekli = new Weekli({
+    wk_id: 'weekli',
+    // specifies the div id weekli is in
+    // (example if &lt;div id = "weekli_custom">&lt;/div> then wk_id: 'weekli_custom')
+
+    week: 'workweek',
+    // decides which days of the week to show
+    // (can be 'week', 'workweek', 'weekend', or 'custom')
+
+    week_days: [],
+    // if 'week: custom', days of the week will be pulled from this array of strings
+    // (ex: week_days: ['Sunday', 'Tuesday', 'Friday'])
+
+    minute_interval: '60',
+    // determines the time-span for each row
+    // (ex: minute_interval: 75 would lead to rows showing 1hr 15min intervals 7:00 - 8:15)
+
+    time_range: '7:00,12:00',
+    // specifies the start and end times for the rows in military format
+    // (ex: time_range: 10:15,15:30 would have rows going from 10:15 am - 3:30 pm)
+
+    editable: true,
+    // determines if weekli component can be changed by user interaction
+
+    time_format: '12hour'
+    // specifies if time should be shown in civilian or military format
+    // can be '12hour' or '24hour'
+});
+
+weekli.build();
                     </code>
-                    <code class="language-html">
-&lt;link rel="stylesheet" type="text/css" href="bower_components/weekli.js/css/weekli.css">
-&lt;script type="text/javascript" src="bower_components/weekli.js/js/weekli.min.js">&lt;/script>
+                </pre>
+
+                <div class="big-block">
+                    <h2>Make It Work For You</h2>
+                    <pre>
+                        <code class="language-javascript">
+weekli.make_uneditable();
+// weekli will now ignore all user input
+
+weekli.make_editable();
+// weekli will react to user input
+
+weekli.load_data(JSON);
+// clear the calendar, then load in the JSON object
+// and display the available times
+
+weekli.all_available();
+// make all times available
+
+weekli.all_unavailable();
+// make all times unavailable
+                        </code>
+                    </pre>
+
+                    <div class="button-group">
+                        <button class="weekli-button" onclick="load_data()">.load_data(JSON)</button>
+                        <button class="weekli-button" onclick="weekli_custom.make_uneditable()">.make_uneditable( )</button>
+                        <button class="weekli-button" onclick="weekli_custom.make_editable()">.make_editable( )</button>
+                        <button class="weekli-button" onclick="weekli_custom.all_available()">.all_available( )</button>
+                        <button class="weekli-button" onclick="weekli_custom.all_unavailable()">.all_unavailable( )</button>
+                    </div>
+
+                    <div id="weekli_custom"></div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /END WEEKLI CONFIG -->
+
+        <!-- INSTALL INSTRUCTIONS -->
+        <div class="big-block green-block install">
+            <div class="container">
+                <h2>Get Your Hands On It</h2>
+                <a href="https://github.com/collnwalkr/weekli" target="_blank">github link</a>
+
+                <br/>
+
+                <p>BOWER</p>
+                <span class="copy" data-clipboard-target="#BOWER">copy</span>
+                <pre>
+                    <code class="language-bash" id="BOWER">
+bower install weekli.js --save
                     </code>
                 </pre>
 
                 <p>NPM</p>
+                <span class="copy" data-clipboard-target="#NPM">copy</span>
                 <pre>
-                    <code class="language-bash">
+                    <code class="language-bash" id="NPM">
 npm install weekli.js --save
                     </code>
-                    <code class="language-html">
-&lt;link rel="stylesheet" type="text/css" href="node_modules/weekli.js/css/weekli.css">
-&lt;script type="text/javascript" src="node_modules/weekli.js/js/weekli.min.js">&lt;/script>
+                </pre>
+
+                <p>GIT</p>
+                <span class="copy" data-clipboard-target="#GIT">copy</span>
+                <pre>
+                    <code class="language-bash" id="GIT">
+git clone https://github.com/collnwalkr/weekli.git
+                    </code>
+                </pre>
+
+                <p>Include The Files</p>
+                <span class="copy" data-clipboard-target="#HTML">copy</span>
+                <pre>
+                    <code class="language-html" id="HTML">
+&lt;!-- be sure to include the css and js files in your HTML -->
+&lt;link type="text/css" rel="stylesheet"  href=".../weekli.css">
+&lt;script type="text/javascript" src=".../weekli.min.js">&lt;/script>
                     </code>
                 </pre>
             </div>
         </div>
         <!-- /END INSTALL INSTRUCTIONS -->
-
     </main>
 
-    <br/>
+    <footer class="grey-block">
+        <p>made by <a href="http://collinwalker.guru/" target="_blank">Collin Walker</a>
+            under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT license</a> for everyone</p>
+
+    </footer>
+
 
 </body>
 
-<script  type="text/javascript" src="js/weekli.min.js"></script>
+<script  type="text/javascript" src="js/weekli.js"></script>
+<script  type="text/javascript" src="node_modules/clipboard/dist/clipboard.min.js"></script>
 <script  type="text/javascript" src="js/index.js"></script>
 <script  type="text/javascript" src="js/prism.js"></script>
 

@@ -2,9 +2,9 @@
 
 **a pure javascript component that allows your users to effortlessly input their availability on a week calendar**
 
-Version 0.2.5
+Version 1.0.0
 
-[Demo and Examples](http://collnwalkr.github.io/weekli/) *in progress*
+[Demo and Examples](http://collnwalkr.github.io/weekli/)
 ![weekli capture](https://cloud.githubusercontent.com/assets/7200683/13758674/cf55750c-e9e7-11e5-8bca-65265480f023.gif)
 ---
 ### Get your hands on it
@@ -57,13 +57,13 @@ var weekli_output = weekli.get_output();
   "available": [
         {
           "day": "WED",
-          "time": "7:00 am -8:00 am"
+          "time": "7:00 am-8:00 am"
         }
     ],
   "unavailable": [
         {
           "day": "WED",
-          "time": "8:00 am -9:00 am"
+          "time": "8:00 am-9:00 am"
         }
     ]
 }
@@ -74,22 +74,22 @@ A weekli object can be instantiated with custom properties.
 // all customization properties and their default value
 var weekli = new Weekli({
     wk_id: 'weekli',
-    week: 'week',
+    week: 'workweek',
     week_days: [],
     minute_interval: '60',
-    time_range: '7:00,17:00',
+    time_range: '7:00,12:00',
     editable: true,
     time_format: '12hour'
 });
 ```
 | attribute |  accepted value and examples |
 |:------------------------------|:-------------|
-| **wk_id:** |  `string` specifies the div id weekli is in the DOM (example if `<div id = "weekli_custom"> </div>` then `wk_id: 'weekli_custom'` |
+| **wk_id:** |  `string` specifies the div id that weekli is in (example if `<div id = "weekli_custom"> </div>` then `wk_id: 'weekli_custom'` |
 | **week:** | `week` , `workweek` ,  `weekend` , or `custom`. determins which days of the week should be shown in columns:  |
 | **week_days:** | if week is `custom`, days of the week will be pulled from this array of strings (ex: `week_days: ['Sunday', 'Tuesday', 'Friday']`) |
 | **minute_interval:** | `int` determines the time-span for each row (ex: `minute_interval: 60` = 7:00 - 8:00 , `minute_interval: 75` = 7:00 - 8:15) |  
 |**time_range:** | `int,int` specifies the start and end times for the rows (ex: `time_range: 10:15,15:30` = 10:15 am - 3:30 pm) |  
-| **editable:** | `true` or `false` determines if weekli component can be edited by user interaction |
+| **editable:** | `true` or `false` determines if weekli component can be changed by user interaction |
 | **time_format:** | `12hour` or `24hour` specifies if time should be shown in civilian or military format |
 In addition, weekli objects have several public functions. 
 ```javascript

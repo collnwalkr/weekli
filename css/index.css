@@ -113,6 +113,7 @@ table.weekli_mobile th.wk-header {
 }
 table.weekli_mobile td.wk-time {
   font-size: 1em;
+  color: #222220;
 }
 table.weekli_mobile th.wk-day {
   font-size: 1em;
@@ -120,15 +121,56 @@ table.weekli_mobile th.wk-day {
 table.weekli_mobile.weekli_editable th.wk-day:hover {
   cursor: pointer;
 }
+::selection {
+  background: #d3d3d3;
+  /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #d3d3d3;
+  /* Gecko Browsers */
+}
+@media only screen and (min-width: 600px) and (max-width: 674px), only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  header {
+    position: fixed;
+    top: 0;
+    z-index: 0;
+    height: 150px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 674px), only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  main {
+    position: relative;
+    z-index: 100;
+    margin-top: 250px;
+    margin-bottom: 100px;
+    background-color: white;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 674px), only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 0;
+    height: 150px;
+  }
+}
+@media only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  body {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 599px), only screen and (min-width: 600px) and (max-width: 674px) {
+  code[class*="language-"],
+  pre[class*="language-"] {
+    font-size: .85em;
+  }
+}
 body {
-  background-color: #FFFFFF;
+  background-color: white;
   font-family: Arial;
   font-weight: 500;
   font-style: normal;
   margin: 0;
-}
-h1 {
-  font-family: 'Kanit', sans-serif;
 }
 .big-block {
   padding: 60px 0;
@@ -138,68 +180,140 @@ h1 {
   background-color: #312d30;
   color: white;
 }
-header.block-light {
+.green-block {
   background-color: #79bd8f;
+  color: white;
+}
+header.block-light {
+  background-color: #f4f4f4;
 }
 header.block-light .wk-logo {
   background-image: url('../assets/logo.svg');
   background-repeat: no-repeat;
-  width: 170px;
-  height: 170px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto;
 }
-header.block-light p {
+header.block-light h1 {
+  color: #312d30;
   text-align: center;
-  color: #255c37;
-  font-size: 1.1em;
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
 }
-button {
-  background-color: #79bd8f;
+.install h2 {
+  display: inline-block;
+}
+.install p {
+  display: inline-block;
+  margin: 2em 0 0 0;
+  font-weight: bold;
+}
+.install a {
+  position: relative;
+  display: inline-block;
+  padding-left: 3px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #317b4a;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+}
+.install span.copy {
+  position: relative;
+  display: inline-block;
+  padding-left: 3px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #317b4a;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+}
+.install span.copy:hover {
+  text-decoration: underline;
+}
+.install span.copied {
+  color: #255c37;
+}
+button.weekli-button {
+  background-color: #272326;
   height: 50px;
   max-width: 100%;
-  min-width: 220px;
-  padding: 0 25px;
-  margin: 10px;
+  outline: none;
+  min-width: 200px;
+  padding: 0 10px;
+  margin: 10px 0;
   border: 0;
-  border-radius: 2px;
   font-size: 0.9em;
+  text-align: center;
   color: white;
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.1s;
-  box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.16);
+  transition: box-shadow 0.1s, color 0.1s;
+  box-shadow: inset 0 -5px 0 0 #79bd8f;
   cursor: pointer;
+  font-weight: bold;
 }
-button span {
-  color: #255c37;
+button.weekli-button:hover {
+  color: #312d30;
+  box-shadow: inset 0 -50px 0 0 #79bd8f;
 }
-button:hover {
-  box-shadow: inset 0 -50px 0 0 rgba(0, 0, 0, 0.16);
+button.weekli-button:active {
+  box-shadow: inset 0 -50px 0 0 #6aa67e;
+}
+@media only screen and (min-width: 600px) and (max-width: 674px), only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 2em 0;
+  }
+  .button-group p {
+    display: inline-block;
+  }
+}
+@media only screen and (max-width: 599px) {
+  .button-group button {
+    display: block;
+    text-align: center;
+    margin: 10px auto 0 auto;
+  }
+  .button-group p {
+    text-align: center;
+  }
 }
 .container {
-  max-width: 900px;
+  max-width: 1000px;
+  padding: 10px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-@media only screen and (min-width: 675px) and (max-width: 884px), only screen and (min-width: 885px) {
-  h1,
-  h2,
-  h3,
-  p {
-    padding: 0;
-  }
+footer.grey-block {
+  background-color: #f4f4f4;
+  color: #8c8c8c;
+  width: 100%;
+  height: 100px;
+  letter-spacing: 0.5px;
 }
-@media only screen and (max-width: 599px), only screen and (min-width: 600px) and (max-width: 674px) {
-  h1,
-  h2,
-  h3,
-  p {
-    padding: 0 10px;
-  }
-  code[class*="language-"],
-  pre[class*="language-"] {
-    font-size: .85em;
-  }
+footer.grey-block p {
+  padding-top: 40px;
+  margin: 0;
+  text-align: center;
+}
+footer.grey-block a {
+  color: #312d30;
 }
 .font-arial {
   font-family: Arial;
@@ -211,18 +325,4 @@ button:hover {
 }
 .font-kanit {
   font-family: 'Kanit', sans-serif;
-}
-.wk-custom table.weekli .wk-cell {
-  background-color: #79bd8f;
-}
-.wk-custom table.weekli .wk-cell.available {
-  background-color: #312d30;
-}
-.wk-custom table.weekli_desktop .wk-header {
-  background-color: #312d30;
-  color: white;
-  padding: 10px;
-}
-.wk-custom table.weekli_desktop .wk-header:hover {
-  background-color: #4f224c;
 }

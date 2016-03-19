@@ -9,10 +9,11 @@
 /////////////////////////////
 // VARIABLES
 /////////////////////////////
-@light-color: #79bd8f;
-@dark-accent: #1E6B37;
-@dark-color: #312d30;
-@white: #FFFFFF;
+@light-color:       #79bd8f;
+@light-grey:        #f4f4f4;
+@dark-accent:       #255c37;
+@dark-color:        #312d30;
+@secondary-color:   #f26d5b;
 
 // BREAKPOINTS
 // Source: http://blog.scur.pl/2012/06/variable-media-queries-less-css/
@@ -21,19 +22,67 @@
 @desktop:     ~"only screen and (min-width: 675px) and (max-width: 884px)";
 @desktop-xl:  ~"only screen and (min-width: 885px)";
 
+/////////////////////////////
+// META
+/////////////////////////////
+::selection {
+  background: #d3d3d3; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #d3d3d3; /* Gecko Browsers */
+}
+
+// Parallax
+header{
+  @media @tablet, @desktop, @desktop-xl{
+    position: fixed;
+    top: 0;
+    z-index: 0;
+    height: 150px;
+  }
+}
+
+main{
+  @media @tablet, @desktop, @desktop-xl{
+    position: relative;
+    z-index: 100;
+    margin-top: 250px;
+    margin-bottom: 100px;
+    background-color: white;
+  }
+}
+
+footer{
+  @media @tablet, @desktop, @desktop-xl{
+    position: fixed;
+    bottom: 0;
+    z-index: 0;
+    height: 150px;
+  }
+}
+
+@media @desktop, @desktop-xl{
+  body{
+    font-size: 16px;
+  }
+}
+
+@media @mobile, @tablet{
+  code[class*="language-"],
+  pre[class*="language-"] {
+    font-size: .85em;
+  }
+}
 
 /////////////////////////////
 // ELEMENTS
 /////////////////////////////
+
 // Main Elements
 body{
-  background-color: @white;
+  background-color: white;
   .font-arial;
   margin: 0;
-}
-
-h1 {
-  .font-kanit;
 }
 
 .big-block{
@@ -44,73 +93,167 @@ h1 {
 .dark-block{
   background-color: @dark-color;
   color: white;
-
 }
 
-// Header
-header.block-light{
+.green-block {
   background-color: @light-color;
+  color: white;
+}
+
+// HEADER
+header.block-light{
+  background-color: @light-grey;
   .wk-logo {
     background-image: url('../assets/logo.svg');
     background-repeat: no-repeat;
-    width: 170px;
-    height: 170px;
+    width: 100px;
+    height: 100px;
     margin: 0 auto;
   }
-  p{
+
+  h1{
+    color: @dark-color;
     text-align: center;
-    color: #255c37;
-    font-size: 1.1em;
+    margin: 0;
+    .font-kanit;
   }
 }
 
-button{
-  background-color: @light-color;
+
+// INSTALL
+.install{
+  h2{
+    display: inline-block;
+  }
+
+  p{
+    display: inline-block;
+    margin: 2em 0 0 0;
+    font-weight: bold;
+  }
+
+  a{
+    position: relative;
+    display: inline-block;
+    padding-left: 3px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #317b4a;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+  }
+  span.copy {
+    position: relative;
+    display: inline-block;
+    padding-left: 3px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #317b4a;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+  }
+
+  span.copy:hover{
+    text-decoration: underline;
+  }
+
+  span.copied{
+    color: @dark-accent;
+  }
+}
+
+button.weekli-button{
+  background-color: #272326;
   height: 50px;
   max-width: 100%;
-  min-width: 220px;
-  padding: 0 25px;
-  margin: 10px;
+  outline:none;
+  min-width: 200px;
+  padding: 0 10px;
+  margin: 10px 0;
   border: 0;
-  border-radius: 2px;
+  //border-radius: 2px;
   font-size: 0.9em;
+  text-align: center;
   color: white;
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.1s;
-  box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.16);
+  transition: box-shadow 0.1s, color 0.1s;
+  box-shadow: inset 0 -5px 0 0 rgba(121, 189, 143, 1);
   cursor: pointer;
-
-  span{
-    color: #255c37;
-  }
+  font-weight: bold;
 
   &:hover{
-    box-shadow: inset 0 -50px 0 0 rgba(0, 0, 0, 0.16);
+    color: @dark-color;
+    box-shadow: inset 0 -50px 0 0 @light-color;
   }
 
+  &:active{
+    box-shadow: inset 0 -50px 0 0 #6aa67e;
+  }
 }
 
-// Weekli's
+.button-group{
+  @media @tablet, @desktop, @desktop-xl{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 2em 0;
+    p{
+      display:inline-block;
+    }
+  }
+
+  @media @mobile{
+    button{
+      display: block;
+      text-align: center;
+      margin: 10px auto 0 auto;
+    }
+    p{
+      text-align: center;
+    }
+  }
+}
+
 .container{
-  max-width: 900px;
+  max-width: 1000px;
+  padding: 10px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-@media @desktop, @desktop-xl{
-  h1,h2,h3,p {
-    padding: 0;
-  }
-}
 
-@media @mobile, @tablet{
-  h1, h2, h3, p {
-    padding: 0 10px;
+// footer
+footer.grey-block{
+
+  background-color: @light-grey;
+  color: #8c8c8c;
+  width: 100%;
+  height: 100px;
+  letter-spacing: 0.5px;
+
+  p{
+    padding-top: 40px;
+    margin: 0;
+    text-align: center;
   }
-  code[class*="language-"],
-  pre[class*="language-"] {
-    font-size: .85em;
+  a{
+    color: @dark-color;
   }
 }
 
@@ -129,44 +272,4 @@ button{
 
 .font-kanit {
   font-family: 'Kanit', sans-serif;
-}
-
-
-/////////////////////////////
-// CUSTOM WEEKLI
-/////////////////////////////
-.wk-custom{
-  @wk-header-color:         @dark-color;
-  @wk-header-color-hover:   #4f224c;
-  @wk-unavailable-color:    @light-color;
-  @wk-available-color:      @dark-color;
-  @wk-mobile-header-color:  #383838;
-  @wk-border-color:         #222220;
-  @wk-header-font-color:    white;
-  @wk-mobile-header-font-color: #FFFFFF;
-
-  table.weekli{
-    .wk-cell {
-      background-color: @wk-unavailable-color;
-    }
-
-    .wk-cell.available{
-      background-color: @wk-available-color;
-    }
-  }
-
-  table.weekli_desktop {
-    .wk-header{
-      background-color: @wk-header-color;
-      color: @wk-header-font-color;
-      padding: 10px;
-    }
-
-    .wk-header:hover{
-      background-color: @wk-header-color-hover;
-    }
-
-  }
-
-
 }

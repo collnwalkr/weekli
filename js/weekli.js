@@ -12,10 +12,10 @@
         // Option defaults
         var defaults = {
             wk_id: 'weekli',
-            week: 'week',
+            week: 'workweek',
             week_days: [],
             minute_interval: 60,
-            time_range: '7,17',
+            time_range: '7,12',
             editable: true,
             time_format: '12hour'
         };
@@ -492,13 +492,13 @@
         //ADD hour rows to tbody
         for(var k = 0; k < weekli_hours.length - 1; k++){
             //CREATE the hour attribute using the current time and next time
-            hour_attr = weekli_hours[k].time + ' ' + weekli_hours[k].am_pm + ' -' + weekli_hours[k+1].time + ' ' + weekli_hours[k+1].am_pm;
+            hour_attr = weekli_hours[k].time + ' ' + weekli_hours[k].am_pm + '-' + weekli_hours[k+1].time + ' ' + weekli_hours[k+1].am_pm;
             //start time row cell
             td = document.createElement('td');
             tr = document.createElement('tr');
             td.setAttribute('data-wk-time-row', hour_attr);
 
-            td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span> - <span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
+            td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span>-<span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
             td.className = 'wk-time wk-header';
             tr.appendChild(td);
             //end time row cell
@@ -563,13 +563,13 @@
             //ADD hour rows
             for (var k = 0; k < weekli_hours.length - 1; k++) {
                 //CREATE the hour attribute using the current time and next time
-                hour_attr = weekli_hours[k].time + ' ' + weekli_hours[k].am_pm + ' -' + weekli_hours[k+1].time + ' ' + weekli_hours[k+1].am_pm;
+                hour_attr = weekli_hours[k].time + ' ' + weekli_hours[k].am_pm + '-' + weekli_hours[k+1].time + ' ' + weekli_hours[k+1].am_pm;
 
                 //start time cell
                 tr = document.createElement('tr');
                 td = document.createElement('td');
                 td.className = 'wk-time wk-header';
-                td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span> - <span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
+                td.innerHTML = '<span class="wk-time-span"> ' + weekli_hours[k].time + ' <span class="wk-ampm">' + weekli_hours[k].am_pm + '</span> </span>-<span class="wk-time-span">' + weekli_hours[k+1].time + ' <span class="wk-ampm">' + weekli_hours[k+1].am_pm + '</span> </span>';
                 //end time cell
 
                 //attach time cell to row
@@ -710,7 +710,7 @@
 
 
         //ADD the stop time to the end of the array
-            current_minute = Math.ceil((stop_time % 1) * 100);
+            current_minute  = Math.ceil((Math.round(stop_time % 1 * 1000) / 1000) * 100);
 
             if(current_minute < 10){
                 print_minute = '0' + current_minute;

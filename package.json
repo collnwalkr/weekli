@@ -1,9 +1,10 @@
 {
   "name": "weekli",
-  "version": "0.2.5",
+  "version": "1.0.0",
   "description": "Javascript component that enables users to quickly select their availability on a week calendar.",
   "main": "Gruntfile.js",
   "dependencies": {
+    "clipboard": "^1.5.9",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "html5shiv": "^3.7.3",
@@ -19,6 +20,15 @@
     "type": "git",
     "url": "git+https://github.com/collnwalkr/weekli.git"
   },
+  "keywords": [
+    "javascript",
+    "ui",
+    "calender",
+    "widget",
+    "agenda",
+    "week",
+    "time"
+  ],
   "author": "Collin Walker",
   "license": "ISC",
   "homepage": "https://github.com/collnwalkr/weekli#readme"

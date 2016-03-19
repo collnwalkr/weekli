@@ -112,6 +112,7 @@ table.weekli_mobile th.wk-header {
 }
 table.weekli_mobile td.wk-time {
   font-size: 1em;
+  color: #222220;
 }
 table.weekli_mobile th.wk-day {
   font-size: 1em;
