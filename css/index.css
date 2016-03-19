@@ -198,6 +198,7 @@ header.block-light h1 {
   color: #312d30;
   text-align: center;
   margin: 0;
+  font-weight: 500;
   font-family: 'Kanit', sans-serif;
 }
 .install h2 {
