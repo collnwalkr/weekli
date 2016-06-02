@@ -1,0 +1,240 @@
+// COLORS
+$wk-header-color:             #f9f9f9;
+$wk-header-color-hover:       #e7e7e7;
+$wk-unavailable-color:        #f26d5b;
+$wk-available-color:          #79BD8F;
+$wk-mobile-header-color:      #383838;
+$wk-border-color:             #222220;
+$wk-header-font-color:        #222220;
+$wk-mobile-header-font-color: #FFFFFF;
+$wk-mobile-row-font-color:    #222220;
+
+// SIZES
+$wk-border-size:          1px;
+$wk-row-height:           3em;
+
+// FONT SIZES and ALIGNMENT
+$wk-base-font:            16px;
+$wk-time-font-mobile:     1em;
+$wk-day-font-mobile:      1em;
+$wk-time-font-tablet:     0.75em;
+$wk-day-font-tablet:      1em;
+$wk-time-font-desktop:    0.75em;
+$wk-day-font-desktop:     0.75em;
+$wk-time-font-desktop-xl: 1em;
+$wk-day-font-desktop-xl:  1em;
+$wk-font-alignment:       left;
+$wk-day-align-mobile:     right;
+
+// CONDITIONALS
+$wk-border:               false;
+$wk-day-abbreviated:      true;
+$wk-hide-ampm:            true;
+
+// BREAKPOINTS
+// Source: http://blog.scur.pl/2012/06/variable-media-queries-less-css/
+$mobile:      "only screen and (max-width: 599px)";
+$tablet:      "only screen and (min-width: 600px) and (max-width: 674px)";
+$desktop:     "only screen and (min-width: 675px) and (max-width: 884px)";
+$desktop-xl:  "only screen and (min-width: 885px)";
+
+// MIXINS
+@mixin border() {
+  @if $wk-border == true {
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: $wk-border-size solid $wk-border-color;
+    }
+  }
+}
+
+@mixin abbreviated(){
+  @if $wk-day-abbreviated == true {
+    .wk-day-abbrv{
+      display: inline-block;
+    }
+    .wk-day-long{
+      display: none;
+    }
+  }
+}
+
+@mixin hide-ampm(){
+  @if $wk-hide-ampm == true {
+    .wk-ampm{
+      display: none;
+    }
+  }
+}
+
+// STYLING
+table.weekli{
+  width: 100%;
+  table-layout: fixed;
+  text-align: $wk-font-alignment;
+
+  font-size: $wk-base-font;
+
+  //DESELECT and PREVENT highlighting
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+
+  .wk-cell{
+    background-color: $wk-unavailable-color;
+  }
+
+
+  .wk-cell.available{
+    background-color: $wk-available-color;
+  }
+
+  .wk-time-span{
+    white-space: nowrap;
+  }
+
+  //IF border is true, style border
+  @include border();
+
+  //IF true, hide am pm
+  @include hide-ampm();
+
+  //IF true
+  tr{
+    height: $wk-row-height;
+  }
+
+}
+
+// IF editable, show pointer cursor on hover
+table.weekli.weekli_editable{
+  .wk-cell:hover{
+    cursor: pointer;
+  }
+}
+table.weekli_desktop.weekli_editable{
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+table.weekli.weekli_uneditable{
+  // style uneditable tbale here
+}
+
+// Desktop version
+table.weekli_desktop{
+
+  // hide mobile HTML
+  @media #{$mobile} {
+  display: none;
+}
+
+  // display desktop HTML
+  @media #{$tablet, $desktop, $desktop-xl}{
+  display: table;
+}
+
+  @media #{$desktop, $desktop-xl}{
+  // hide abbreviated days
+  .wk-day-abbrv{
+    display: none;
+  }
+  // show long version of odays
+  .wk-day-long{
+    display: inline-block;
+  }
+}
+
+  @media #{$tablet}{
+    @include abbreviated();
+
+  .wk-day{
+    font-size: $wk-day-font-tablet;
+  }
+
+  td.wk-time{
+    font-size: $wk-time-font-tablet;
+  }
+}
+
+  @media #{$desktop}{
+  .wk-day{
+    font-size: $wk-day-font-desktop;
+  }
+  td.wk-time{
+    font-size: $wk-time-font-desktop;
+  }
+}
+
+  @media #{$desktop-xl}{
+  .wk-day{
+    font-size: $wk-day-font-desktop-xl;
+  }
+  td.wk-time{
+    font-size: $wk-time-font-desktop-xl;
+  }
+}
+
+  .wk-header{
+    background-color: $wk-header-color;
+    color: $wk-header-font-color;
+    padding: 10px;
+  }
+
+  .wk-header:hover{
+    background-color: $wk-header-color-hover;
+  }
+
+  .wk-empty{
+    border: 0 !important;
+    cursor: default;
+  }
+
+}
+
+
+table.weekli_mobile{
+
+  @media #{$mobile} {
+  display: table;
+}
+
+  @media #{$tablet, $desktop, $desktop-xl}{
+  display: none;
+}
+
+  .wk-header {
+    background-color: $wk-header-color;
+    padding: 10px;
+  }
+
+  th.wk-header{
+    background-color: $wk-mobile-header-color;
+    color: $wk-mobile-header-font-color;
+    text-align: $wk-day-align-mobile;
+  }
+
+  td.wk-time{
+    font-size: $wk-time-font-mobile;
+    color: $wk-mobile-row-font-color;
+  }
+
+  th.wk-day{
+    font-size: $wk-day-font-mobile
+  }
+
+}
+
+table.weekli_mobile.weekli_editable{
+  th.wk-day:hover{
+    cursor: pointer;
+  }
+}
